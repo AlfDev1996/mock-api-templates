@@ -114,7 +114,7 @@ def generate_template(topic):
     client = anthropic.Anthropic(api_key=api_key)
     message = client.messages.create(
         model="claude-opus-4-6",
-        max_tokens=3000,
+        max_tokens=6000,
         system=SYSTEM_PROMPT,
         messages=[{
             "role": "user",
@@ -129,10 +129,17 @@ def generate_template(topic):
 
     raw = message.content[0].text.strip()
 
-    # Extract JSON if wrapped in code block
+    # Try extracting from fenced code block first
     match = re.search(r"```(?:json)?\s*([\s\S]+?)\s*```", raw)
     if match:
-        raw = match.group(1)
+        raw = match.group(1).strip()
+
+    # Fallback: extract outermost JSON object
+    if not raw.startswith("{"):
+        start = raw.find("{")
+        end = raw.rfind("}") + 1
+        if start != -1 and end > start:
+            raw = raw[start:end]
 
     try:
         data = json.loads(raw)
