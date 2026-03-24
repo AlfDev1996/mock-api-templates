@@ -1,0 +1,104 @@
+{
+  "name": "E-commerce Cart API",
+  "description": "Shopping cart endpoints: view cart, add/remove items, apply coupon, and checkout.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Get cart",
+      "method": "GET",
+      "path": "/cart",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "cart_id": "{{uuid}}",
+        "user_id": "{{uuid}}",
+        "items": [
+          {
+            "product_id": "{{uuid}}",
+            "name": "{{word}} Pro",
+            "quantity": 2,
+            "unit_price": 49.99,
+            "subtotal": 99.98
+          },
+          {
+            "product_id": "{{uuid}}",
+            "name": "{{word}} Case",
+            "quantity": 1,
+            "unit_price": 12.50,
+            "subtotal": 12.50
+          }
+        ],
+        "subtotal": 112.48,
+        "discount": 0,
+        "tax": 9.01,
+        "total": 121.49,
+        "currency": "USD",
+        "updated_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Add item to cart",
+      "method": "POST",
+      "path": "/cart/items",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 100,
+      "response": {
+        "cart_id": "{{uuid}}",
+        "item_added": true,
+        "item": {
+          "product_id": "{{uuid}}",
+          "quantity": 1,
+          "unit_price": "{{float}}"
+        },
+        "cart_total": "{{float}}",
+        "updated_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Remove item from cart",
+      "method": "DELETE",
+      "path": "/cart/items/:product_id",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 80,
+      "response": {
+        "cart_id": "{{uuid}}",
+        "item_removed": true,
+        "cart_total": "{{float}}",
+        "updated_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Apply coupon",
+      "method": "POST",
+      "path": "/cart/coupon",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 150,
+      "response": {
+        "cart_id": "{{uuid}}",
+        "coupon_code": "SAVE10",
+        "discount_type": "percentage",
+        "discount_value": 10,
+        "discount_amount": 11.25,
+        "new_total": 110.24,
+        "currency": "USD"
+      }
+    },
+    {
+      "name": "Invalid coupon (400 scenario)",
+      "method": "POST",
+      "path": "/cart/coupon",
+      "status_code": 400,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 100,
+      "response": {
+        "error": "invalid_coupon",
+        "message": "Coupon code is expired or does not exist",
+        "status": 400
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "name": "SOAP Payment Service",
+  "description": "Enterprise SOAP payment service mock with ProcessPayment, GetPaymentStatus, and CancelPayment operations. Common in banking and insurance integrations.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_soap.html",
+  "note": "For SOAP mocks on MockHub, upload the WSDL file at the URL above.",
+  "service": {
+    "name": "PaymentService",
+    "namespace": "http://payment.example.com/v1",
+    "endpoint": "/soap/payment"
+  },
+  "operations": [
+    {
+      "name": "ProcessPayment",
+      "mock_response": {
+        "status_code": 200,
+        "headers": { "Content-Type": "text/xml; charset=utf-8" },
+        "envelope": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soapenv:Body>\n    <ProcessPaymentResponse xmlns=\"http://payment.example.com/v1\">\n      <transactionId>{{uuid}}</transactionId>\n      <status>APPROVED</status>\n      <authorizationCode>AUTH-{{integer}}</authorizationCode>\n      <timestamp>{{isodate}}</timestamp>\n    </ProcessPaymentResponse>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      }
+    },
+    {
+      "name": "ProcessPayment (declined scenario)",
+      "mock_response": {
+        "status_code": 200,
+        "headers": { "Content-Type": "text/xml; charset=utf-8" },
+        "envelope": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soapenv:Body>\n    <ProcessPaymentResponse xmlns=\"http://payment.example.com/v1\">\n      <transactionId>{{uuid}}</transactionId>\n      <status>DECLINED</status>\n      <errorCode>INSUFFICIENT_FUNDS</errorCode>\n      <errorMessage>Payment declined: insufficient funds</errorMessage>\n      <timestamp>{{isodate}}</timestamp>\n    </ProcessPaymentResponse>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      }
+    },
+    {
+      "name": "GetPaymentStatus",
+      "mock_response": {
+        "status_code": 200,
+        "headers": { "Content-Type": "text/xml; charset=utf-8" },
+        "envelope": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soapenv:Body>\n    <GetPaymentStatusResponse xmlns=\"http://payment.example.com/v1\">\n      <transactionId>{{uuid}}</transactionId>\n      <status>SETTLED</status>\n      <amount>299.99</amount>\n      <currency>EUR</currency>\n      <settledAt>{{isodate}}</settledAt>\n    </GetPaymentStatusResponse>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      }
+    },
+    {
+      "name": "CancelPayment",
+      "mock_response": {
+        "status_code": 200,
+        "headers": { "Content-Type": "text/xml; charset=utf-8" },
+        "envelope": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soapenv:Body>\n    <CancelPaymentResponse xmlns=\"http://payment.example.com/v1\">\n      <transactionId>{{uuid}}</transactionId>\n      <cancelled>true</cancelled>\n      <refundId>{{uuid}}</refundId>\n      <timestamp>{{isodate}}</timestamp>\n    </CancelPaymentResponse>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      }
+    }
+  ]
+}

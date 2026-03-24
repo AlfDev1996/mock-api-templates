@@ -1,0 +1,92 @@
+{
+  "name": "E-commerce Orders API",
+  "description": "Order management endpoints: place order, track status, list history, request refund.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Place order",
+      "method": "POST",
+      "path": "/orders",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "Location": "/orders/{{uuid}}"
+      },
+      "delay_ms": 300,
+      "response": {
+        "order_id": "{{uuid}}",
+        "status": "confirmed",
+        "items_count": 3,
+        "total": 121.49,
+        "currency": "USD",
+        "estimated_delivery": "2025-02-10",
+        "created_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Get order by ID",
+      "method": "GET",
+      "path": "/orders/:order_id",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "order_id": "{{uuid}}",
+        "status": "shipped",
+        "tracking_number": "TRK-{{integer}}",
+        "carrier": "FedEx",
+        "items": [
+          { "product_id": "{{uuid}}", "name": "{{word}} Pro", "quantity": 2, "price": 49.99 }
+        ],
+        "shipping_address": {
+          "street": "123 {{word}} St",
+          "city": "{{city}}",
+          "zip": "{{zipcode}}",
+          "country": "{{country}}"
+        },
+        "subtotal": 99.98,
+        "shipping_cost": 9.99,
+        "tax": 8.80,
+        "total": 118.77,
+        "currency": "USD",
+        "placed_at": "{{isodate}}",
+        "updated_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "List orders",
+      "method": "GET",
+      "path": "/orders",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "orders": [
+          { "order_id": "{{uuid}}", "status": "delivered", "total": 89.00, "placed_at": "{{isodate}}" },
+          { "order_id": "{{uuid}}", "status": "shipped",   "total": 45.50, "placed_at": "{{isodate}}" },
+          { "order_id": "{{uuid}}", "status": "confirmed", "total": 121.49, "placed_at": "{{isodate}}" }
+        ],
+        "total": 3,
+        "page": 1,
+        "per_page": 20
+      }
+    },
+    {
+      "name": "Request refund",
+      "method": "POST",
+      "path": "/orders/:order_id/refund",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 400,
+      "response": {
+        "refund_id": "{{uuid}}",
+        "order_id": "{{uuid}}",
+        "status": "pending",
+        "amount": 121.49,
+        "currency": "USD",
+        "estimated_processing_days": 5,
+        "created_at": "{{isodate}}"
+      }
+    }
+  ]
+}

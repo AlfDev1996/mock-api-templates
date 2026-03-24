@@ -1,0 +1,142 @@
+[
+  {
+    "slug": "messaging-api",
+    "category": "messaging",
+    "name": "Messaging & Chat API",
+    "description": "Chat messages, conversations, channels, direct messages, typing indicators",
+    "published": false
+  },
+  {
+    "slug": "blog-cms-api",
+    "category": "cms",
+    "name": "Blog / CMS API",
+    "description": "Posts, categories, tags, authors, comments, drafts, publish flow",
+    "published": false
+  },
+  {
+    "slug": "inventory-api",
+    "category": "ecommerce",
+    "name": "Inventory Management API",
+    "description": "Warehouses, stock levels, SKUs, suppliers, purchase orders, low-stock alerts",
+    "published": false
+  },
+  {
+    "slug": "analytics-api",
+    "category": "analytics",
+    "name": "Analytics & Events API",
+    "description": "Page views, events, sessions, funnels, conversion rates, UTM tracking",
+    "published": false
+  },
+  {
+    "slug": "geolocation-api",
+    "category": "location",
+    "name": "Geolocation & Maps API",
+    "description": "Geocoding, reverse geocoding, distance matrix, points of interest, routing",
+    "published": false
+  },
+  {
+    "slug": "file-upload-api",
+    "category": "storage",
+    "name": "File Upload & Storage API",
+    "description": "Upload files, get presigned URLs, list files, delete, generate thumbnails",
+    "published": false
+  },
+  {
+    "slug": "task-management-api",
+    "category": "productivity",
+    "name": "Task Management API",
+    "description": "Projects, tasks, subtasks, assignees, due dates, labels, Kanban status",
+    "published": false
+  },
+  {
+    "slug": "email-api",
+    "category": "messaging",
+    "name": "Email Service API",
+    "description": "Send email, templates, delivery status, bounces, unsubscribes, webhooks",
+    "published": false
+  },
+  {
+    "slug": "weather-api",
+    "category": "data",
+    "name": "Weather API",
+    "description": "Current weather, 7-day forecast, hourly data, alerts, historical data",
+    "published": false
+  },
+  {
+    "slug": "booking-api",
+    "category": "booking",
+    "name": "Booking & Reservations API",
+    "description": "Availability slots, create/cancel booking, reminders, capacity management",
+    "published": false
+  },
+  {
+    "slug": "search-api",
+    "category": "search",
+    "name": "Search & Autocomplete API",
+    "description": "Full-text search, filters, facets, pagination, suggestions, spell check",
+    "published": false
+  },
+  {
+    "slug": "subscription-api",
+    "category": "billing",
+    "name": "Subscription & Billing API",
+    "description": "Plans, subscriptions, invoices, upgrade/downgrade, usage metering",
+    "published": false
+  },
+  {
+    "slug": "logistics-api",
+    "category": "logistics",
+    "name": "Shipping & Logistics API",
+    "description": "Shipments, tracking events, carriers, labels, estimated delivery",
+    "published": false
+  },
+  {
+    "slug": "iot-devices-api",
+    "category": "iot",
+    "name": "IoT Devices API",
+    "description": "Device registry, sensor readings, commands, alerts, firmware updates",
+    "published": false
+  },
+  {
+    "slug": "restaurant-api",
+    "category": "food",
+    "name": "Restaurant & Food Delivery API",
+    "description": "Menu items, categories, orders, delivery tracking, reviews, riders",
+    "published": false
+  },
+  {
+    "slug": "banking-api",
+    "category": "finance",
+    "name": "Banking & Accounts API",
+    "description": "Accounts, balances, transactions, transfers, statements, beneficiaries",
+    "published": false
+  },
+  {
+    "slug": "hr-employees-api",
+    "category": "hr",
+    "name": "HR & Employees API",
+    "description": "Employees, departments, leave requests, payroll, performance reviews",
+    "published": false
+  },
+  {
+    "slug": "real-estate-api",
+    "category": "real-estate",
+    "name": "Real Estate Listings API",
+    "description": "Properties, listings, filters, agents, viewings, mortgage calculator",
+    "published": false
+  },
+  {
+    "slug": "crm-contacts-api",
+    "category": "crm",
+    "name": "CRM & Contacts API",
+    "description": "Contacts, companies, deals, pipeline stages, activities, notes",
+    "published": false
+  },
+  {
+    "slug": "video-streaming-api",
+    "category": "media",
+    "name": "Video Streaming API",
+    "description": "Videos, playlists, watch history, recommendations, subtitles, quality",
+    "published": false
+  }
+]

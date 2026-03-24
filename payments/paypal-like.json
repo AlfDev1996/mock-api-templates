@@ -1,0 +1,87 @@
+{
+  "name": "PayPal-like Payments API",
+  "description": "Mock PayPal REST API endpoints: create order, capture payment, refund, and webhook events.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Create order",
+      "method": "POST",
+      "path": "/v2/checkout/orders",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "PayPal-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 250,
+      "response": {
+        "id": "{{uuid}}",
+        "status": "CREATED",
+        "links": [
+          { "href": "https://api.sandbox.paypal.com/v2/checkout/orders/{{uuid}}", "rel": "self", "method": "GET" },
+          { "href": "https://www.sandbox.paypal.com/checkoutnow?token={{uuid}}", "rel": "approve", "method": "GET" },
+          { "href": "https://api.sandbox.paypal.com/v2/checkout/orders/{{uuid}}/capture", "rel": "capture", "method": "POST" }
+        ]
+      }
+    },
+    {
+      "name": "Capture payment",
+      "method": "POST",
+      "path": "/v2/checkout/orders/:order_id/capture",
+      "status_code": 201,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 300,
+      "response": {
+        "id": "{{uuid}}",
+        "status": "COMPLETED",
+        "payer": {
+          "name": { "given_name": "{{firstname}}", "surname": "{{lastname}}" },
+          "email_address": "{{email}}",
+          "payer_id": "{{uuid}}"
+        },
+        "purchase_units": [
+          {
+            "reference_id": "default",
+            "payments": {
+              "captures": [
+                {
+                  "id": "{{uuid}}",
+                  "status": "COMPLETED",
+                  "amount": { "currency_code": "USD", "value": "29.99" },
+                  "create_time": "{{isodate}}"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Payment denied (422 scenario)",
+      "method": "POST",
+      "path": "/v2/checkout/orders/:order_id/capture",
+      "status_code": 422,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 200,
+      "response": {
+        "name": "INSTRUMENT_DECLINED",
+        "details": [{ "issue": "INSTRUMENT_DECLINED", "description": "The instrument presented was declined." }],
+        "message": "The requested action could not be performed.",
+        "debug_id": "{{uuid}}"
+      }
+    },
+    {
+      "name": "Refund capture",
+      "method": "POST",
+      "path": "/v2/payments/captures/:capture_id/refund",
+      "status_code": 201,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 350,
+      "response": {
+        "id": "{{uuid}}",
+        "status": "COMPLETED",
+        "amount": { "currency_code": "USD", "value": "29.99" },
+        "create_time": "{{isodate}}"
+      }
+    }
+  ]
+}

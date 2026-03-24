@@ -1,0 +1,131 @@
+{
+  "name": "Healthcare Patient Records API",
+  "description": "Mock FHIR-inspired patient records API. Useful for testing healthcare apps, EHR integrations, and medical data processing pipelines.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "note": "All data is randomly generated. Not real patient data. Safe for development and testing.",
+  "endpoints": [
+    {
+      "name": "Get patient",
+      "method": "GET",
+      "path": "/patients/:id",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "id": "{{uuid}}",
+        "resourceType": "Patient",
+        "name": [{ "use": "official", "family": "{{lastname}}", "given": ["{{firstname}}"] }],
+        "birthDate": "1985-06-15",
+        "gender": "male",
+        "telecom": [
+          { "system": "phone", "value": "{{phone}}", "use": "home" },
+          { "system": "email", "value": "{{email}}" }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["{{integer}} {{word}} Street"],
+            "city": "{{city}}",
+            "postalCode": "{{zipcode}}",
+            "country": "{{country}}"
+          }
+        ],
+        "identifier": [
+          { "system": "http://example.com/mrn", "value": "MRN-{{integer}}" }
+        ]
+      }
+    },
+    {
+      "name": "List patients",
+      "method": "GET",
+      "path": "/patients",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "resourceType": "Bundle",
+        "type": "searchset",
+        "total": 3,
+        "entry": [
+          { "resource": { "id": "{{uuid}}", "resourceType": "Patient", "name": [{ "family": "{{lastname}}", "given": ["{{firstname}}"] }], "birthDate": "1990-03-22" } },
+          { "resource": { "id": "{{uuid}}", "resourceType": "Patient", "name": [{ "family": "{{lastname}}", "given": ["{{firstname}}"] }], "birthDate": "1975-11-08" } },
+          { "resource": { "id": "{{uuid}}", "resourceType": "Patient", "name": [{ "family": "{{lastname}}", "given": ["{{firstname}}"] }], "birthDate": "2001-07-14" } }
+        ]
+      }
+    },
+    {
+      "name": "Get observations (lab results)",
+      "method": "GET",
+      "path": "/patients/:id/observations",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "resourceType": "Bundle",
+        "type": "searchset",
+        "entry": [
+          {
+            "resource": {
+              "resourceType": "Observation",
+              "id": "{{uuid}}",
+              "status": "final",
+              "code": { "coding": [{ "system": "http://loinc.org", "code": "8867-4", "display": "Heart rate" }] },
+              "valueQuantity": { "value": 72, "unit": "beats/minute" },
+              "effectiveDateTime": "{{isodate}}"
+            }
+          },
+          {
+            "resource": {
+              "resourceType": "Observation",
+              "id": "{{uuid}}",
+              "status": "final",
+              "code": { "coding": [{ "system": "http://loinc.org", "code": "55284-4", "display": "Blood pressure" }] },
+              "component": [
+                { "code": { "display": "Systolic" },  "valueQuantity": { "value": 120, "unit": "mmHg" } },
+                { "code": { "display": "Diastolic" }, "valueQuantity": { "value": 80,  "unit": "mmHg" } }
+              ],
+              "effectiveDateTime": "{{isodate}}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Create appointment",
+      "method": "POST",
+      "path": "/appointments",
+      "status_code": 201,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 200,
+      "response": {
+        "id": "{{uuid}}",
+        "resourceType": "Appointment",
+        "status": "booked",
+        "description": "Annual check-up",
+        "start": "{{isodate}}",
+        "end": "{{isodate}}",
+        "participant": [
+          { "actor": { "reference": "Patient/{{uuid}}", "display": "{{name}}" }, "status": "accepted" }
+        ]
+      }
+    },
+    {
+      "name": "Patient not found (404 scenario)",
+      "method": "GET",
+      "path": "/patients/:id",
+      "status_code": 404,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "resourceType": "OperationOutcome",
+        "issue": [
+          {
+            "severity": "error",
+            "code": "not-found",
+            "diagnostics": "Patient with id not found"
+          }
+        ]
+      }
+    }
+  ]
+}

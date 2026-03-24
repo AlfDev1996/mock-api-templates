@@ -1,0 +1,82 @@
+{
+  "name": "OAuth2 Mock API",
+  "description": "Simulates an OAuth2 authorization server: token endpoint, introspection, and user info. Useful for testing OAuth2 client integrations without a real identity provider.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Token endpoint (client_credentials / authorization_code)",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store"
+      },
+      "delay_ms": 150,
+      "response": {
+        "access_token": "mock_at_{{uuid}}",
+        "token_type": "Bearer",
+        "expires_in": 3600,
+        "refresh_token": "mock_rt_{{uuid}}",
+        "scope": "openid profile email"
+      }
+    },
+    {
+      "name": "Invalid client (401 scenario)",
+      "method": "POST",
+      "path": "/oauth2/token",
+      "status_code": 401,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 100,
+      "response": {
+        "error": "invalid_client",
+        "error_description": "Client authentication failed"
+      }
+    },
+    {
+      "name": "Token introspection",
+      "method": "POST",
+      "path": "/oauth2/introspect",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 80,
+      "response": {
+        "active": true,
+        "sub": "{{uuid}}",
+        "client_id": "my-app",
+        "scope": "openid profile email",
+        "exp": 9999999999,
+        "iat": "{{timestamp}}"
+      }
+    },
+    {
+      "name": "Revoked token introspection",
+      "method": "POST",
+      "path": "/oauth2/introspect",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 80,
+      "response": {
+        "active": false
+      }
+    },
+    {
+      "name": "UserInfo endpoint",
+      "method": "GET",
+      "path": "/oauth2/userinfo",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "sub": "{{uuid}}",
+        "name": "{{name}}",
+        "given_name": "{{firstname}}",
+        "family_name": "{{lastname}}",
+        "email": "{{email}}",
+        "email_verified": true,
+        "picture": "https://example.com/avatar/{{uuid}}.jpg",
+        "locale": "en-US"
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+name: Add New API Template
+
+on:
+  # Every 3 days at 10:00 UTC
+  schedule:
+    - cron: "0 10 */3 * *"
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Template slug (leave empty for next unpublished)"
+        required: false
+        default: ""
+      dry_run:
+        description: "Dry run (print only, do not commit)"
+        type: boolean
+        default: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Generate new template
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.slug }}" ]; then
+            ARGS="--slug ${{ github.event.inputs.slug }}"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          python scripts/generate_template.py $ARGS
+
+      - name: Commit new template and updated README
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "MockHub Bot"
+          git config user.email "bot@mockhub.ovh"
+          git add .
+          git diff --staged --quiet || git commit -m "feat: add new API template [skip ci]"
+          git push

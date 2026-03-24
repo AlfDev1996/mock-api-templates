@@ -1,0 +1,124 @@
+{
+  "name": "JWT Authentication API",
+  "description": "Mock JWT auth flow: register, login, refresh token, logout, and get current user. Useful for frontend apps that need auth endpoints during development.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Register",
+      "method": "POST",
+      "path": "/auth/register",
+      "status_code": 201,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 200,
+      "response": {
+        "user": {
+          "id": "{{uuid}}",
+          "email": "{{email}}",
+          "name": "{{name}}",
+          "created_at": "{{isodate}}"
+        },
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ7e3V1aWR9fSIsImlhdCI6MTcwMDAwMDAwMH0.mock_signature",
+        "refresh_token": "rt_{{uuid}}",
+        "expires_in": 3600
+      }
+    },
+    {
+      "name": "Email already taken (409 scenario)",
+      "method": "POST",
+      "path": "/auth/register",
+      "status_code": 409,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 150,
+      "response": {
+        "error": "email_taken",
+        "message": "An account with this email already exists",
+        "status": 409
+      }
+    },
+    {
+      "name": "Login",
+      "method": "POST",
+      "path": "/auth/login",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 180,
+      "response": {
+        "user": {
+          "id": "{{uuid}}",
+          "email": "{{email}}",
+          "name": "{{name}}",
+          "role": "user"
+        },
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ7e3V1aWR9fSIsImlhdCI6MTcwMDAwMDAwMH0.mock_signature",
+        "refresh_token": "rt_{{uuid}}",
+        "expires_in": 3600
+      }
+    },
+    {
+      "name": "Wrong credentials (401 scenario)",
+      "method": "POST",
+      "path": "/auth/login",
+      "status_code": 401,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 200,
+      "response": {
+        "error": "invalid_credentials",
+        "message": "Email or password is incorrect",
+        "status": 401
+      }
+    },
+    {
+      "name": "Refresh token",
+      "method": "POST",
+      "path": "/auth/refresh",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 100,
+      "response": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ7e3V1aWR9fSIsImlhdCI6MTcwMDAwMDAwMH0.new_mock_signature",
+        "expires_in": 3600
+      }
+    },
+    {
+      "name": "Get current user (me)",
+      "method": "GET",
+      "path": "/auth/me",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "id": "{{uuid}}",
+        "email": "{{email}}",
+        "name": "{{name}}",
+        "avatar_url": "https://gravatar.com/avatar/{{uuid}}",
+        "role": "user",
+        "plan": "free",
+        "created_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Unauthorized (401 scenario)",
+      "method": "GET",
+      "path": "/auth/me",
+      "status_code": 401,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "error": "unauthorized",
+        "message": "Access token is missing or invalid",
+        "status": 401
+      }
+    },
+    {
+      "name": "Logout",
+      "method": "POST",
+      "path": "/auth/logout",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 80,
+      "response": {
+        "message": "Logged out successfully"
+      }
+    }
+  ]
+}

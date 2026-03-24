@@ -1,0 +1,89 @@
+{
+  "name": "Notifications API",
+  "description": "Mock notification system: list notifications, mark as read, and push notification registration.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "List notifications",
+      "method": "GET",
+      "path": "/notifications",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "notifications": [
+          {
+            "id": "{{uuid}}",
+            "type": "like",
+            "read": false,
+            "actor": { "id": "{{uuid}}", "username": "{{word}}_dev", "avatar_url": "https://avatars.example.com/{{uuid}}" },
+            "message": "liked your post",
+            "target_id": "{{uuid}}",
+            "target_type": "post",
+            "created_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "type": "follow",
+            "read": false,
+            "actor": { "id": "{{uuid}}", "username": "{{word}}_eng", "avatar_url": "https://avatars.example.com/{{uuid}}" },
+            "message": "started following you",
+            "target_id": null,
+            "target_type": null,
+            "created_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "type": "comment",
+            "read": true,
+            "actor": { "id": "{{uuid}}", "username": "{{word}}_coder", "avatar_url": "https://avatars.example.com/{{uuid}}" },
+            "message": "commented on your post",
+            "target_id": "{{uuid}}",
+            "target_type": "post",
+            "created_at": "{{isodate}}"
+          }
+        ],
+        "unread_count": 2,
+        "total": 3
+      }
+    },
+    {
+      "name": "Mark notification as read",
+      "method": "PATCH",
+      "path": "/notifications/:id/read",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 60,
+      "response": {
+        "id": "{{uuid}}",
+        "read": true,
+        "updated_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Mark all notifications as read",
+      "method": "POST",
+      "path": "/notifications/read-all",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 80,
+      "response": {
+        "marked_read": 5,
+        "unread_count": 0
+      }
+    },
+    {
+      "name": "Register push token",
+      "method": "POST",
+      "path": "/notifications/push-token",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 100,
+      "response": {
+        "token_registered": true,
+        "platform": "ios",
+        "created_at": "{{isodate}}"
+      }
+    }
+  ]
+}

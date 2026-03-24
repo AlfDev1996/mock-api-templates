@@ -1,0 +1,109 @@
+{
+  "name": "Stripe-like Payments API",
+  "description": "Mock payment endpoints inspired by Stripe's API. Charge a card, retrieve a charge, create a refund, and simulate payment failures.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Create payment intent",
+      "method": "POST",
+      "path": "/v1/payment_intents",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 250,
+      "response": {
+        "id": "pi_{{uuid}}",
+        "object": "payment_intent",
+        "amount": 2999,
+        "currency": "usd",
+        "status": "requires_payment_method",
+        "client_secret": "pi_{{uuid}}_secret_{{uuid}}",
+        "created": "{{timestamp}}"
+      }
+    },
+    {
+      "name": "Confirm payment (success)",
+      "method": "POST",
+      "path": "/v1/payment_intents/:id/confirm",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 300,
+      "response": {
+        "id": "pi_{{uuid}}",
+        "object": "payment_intent",
+        "amount": 2999,
+        "currency": "usd",
+        "status": "succeeded",
+        "payment_method": "pm_{{uuid}}",
+        "receipt_email": "{{email}}",
+        "created": "{{timestamp}}"
+      }
+    },
+    {
+      "name": "Payment declined (402 scenario)",
+      "method": "POST",
+      "path": "/v1/payment_intents/:id/confirm",
+      "status_code": 402,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 200,
+      "response": {
+        "error": {
+          "type": "card_error",
+          "code": "card_declined",
+          "decline_code": "insufficient_funds",
+          "message": "Your card has insufficient funds.",
+          "param": "payment_method"
+        }
+      }
+    },
+    {
+      "name": "Retrieve payment intent",
+      "method": "GET",
+      "path": "/v1/payment_intents/:id",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "id": "pi_{{uuid}}",
+        "object": "payment_intent",
+        "amount": 2999,
+        "currency": "usd",
+        "status": "succeeded",
+        "created": "{{timestamp}}"
+      }
+    },
+    {
+      "name": "Create refund",
+      "method": "POST",
+      "path": "/v1/refunds",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 350,
+      "response": {
+        "id": "re_{{uuid}}",
+        "object": "refund",
+        "amount": 2999,
+        "currency": "usd",
+        "status": "succeeded",
+        "payment_intent": "pi_{{uuid}}",
+        "created": "{{timestamp}}"
+      }
+    },
+    {
+      "name": "List charges",
+      "method": "GET",
+      "path": "/v1/charges",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "object": "list",
+        "data": [
+          { "id": "ch_{{uuid}}", "amount": 2999, "currency": "usd", "status": "succeeded", "created": "{{timestamp}}" },
+          { "id": "ch_{{uuid}}", "amount": 1500, "currency": "usd", "status": "succeeded", "created": "{{timestamp}}" }
+        ],
+        "has_more": false,
+        "total_count": 2
+      }
+    }
+  ]
+}

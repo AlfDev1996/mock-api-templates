@@ -1,0 +1,120 @@
+{
+  "name": "E-commerce Products API",
+  "description": "Mock endpoints for a typical e-commerce product catalog. Includes listing, single product, search, and category filtering.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "List all products",
+      "method": "GET",
+      "path": "/products",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "data": [
+          {
+            "id": "{{uuid}}",
+            "name": "{{word}} Pro",
+            "price": "{{float}}",
+            "currency": "USD",
+            "category": "electronics",
+            "in_stock": "{{boolean}}",
+            "rating": 4.5,
+            "created_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{word}} Plus",
+            "price": "{{float}}",
+            "currency": "USD",
+            "category": "clothing",
+            "in_stock": "{{boolean}}",
+            "rating": 3.8,
+            "created_at": "{{isodate}}"
+          }
+        ],
+        "total": 128,
+        "page": 1,
+        "per_page": 20
+      }
+    },
+    {
+      "name": "Get single product",
+      "method": "GET",
+      "path": "/products/:id",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "id": "{{uuid}}",
+        "name": "{{word}} Pro Max",
+        "description": "{{sentence}}",
+        "price": "{{float}}",
+        "currency": "USD",
+        "sku": "SKU-{{integer}}",
+        "category": "electronics",
+        "images": ["https://example.com/img/{{uuid}}.jpg"],
+        "in_stock": true,
+        "stock_quantity": 42,
+        "rating": 4.7,
+        "reviews_count": 312,
+        "created_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Product not found (404 scenario)",
+      "method": "GET",
+      "path": "/products/:id",
+      "status_code": 404,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "error": "not_found",
+        "message": "Product not found",
+        "status": 404
+      }
+    },
+    {
+      "name": "Create product",
+      "method": "POST",
+      "path": "/products",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "Location": "/products/{{uuid}}"
+      },
+      "delay_ms": 120,
+      "response": {
+        "id": "{{uuid}}",
+        "name": "New Product",
+        "price": 29.99,
+        "currency": "USD",
+        "category": "general",
+        "in_stock": true,
+        "created_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Update product",
+      "method": "PUT",
+      "path": "/products/:id",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 80,
+      "response": {
+        "id": "{{uuid}}",
+        "updated": true,
+        "updated_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Delete product",
+      "method": "DELETE",
+      "path": "/products/:id",
+      "status_code": 204,
+      "headers": {},
+      "delay_ms": 50,
+      "response": null
+    }
+  ]
+}

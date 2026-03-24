@@ -1,0 +1,118 @@
+{
+  "name": "Social Network Users & Feed API",
+  "description": "Mock social platform endpoints: user profiles, following/followers, timeline feed, posts, likes and comments.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Get user profile",
+      "method": "GET",
+      "path": "/users/:username",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "id": "{{uuid}}",
+        "username": "{{word}}_dev",
+        "name": "{{name}}",
+        "bio": "{{sentence}}",
+        "avatar_url": "https://avatars.example.com/{{uuid}}",
+        "website": "{{url}}",
+        "location": "{{city}}, {{country}}",
+        "followers_count": 1240,
+        "following_count": 382,
+        "posts_count": 97,
+        "joined_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Get timeline feed",
+      "method": "GET",
+      "path": "/feed",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "posts": [
+          {
+            "id": "{{uuid}}",
+            "author": { "id": "{{uuid}}", "username": "{{word}}_dev", "avatar_url": "https://avatars.example.com/{{uuid}}" },
+            "content": "{{sentence}}",
+            "media_url": null,
+            "likes_count": 42,
+            "comments_count": 7,
+            "liked_by_me": false,
+            "created_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "author": { "id": "{{uuid}}", "username": "{{word}}_eng", "avatar_url": "https://avatars.example.com/{{uuid}}" },
+            "content": "{{sentence}}",
+            "media_url": "https://media.example.com/{{uuid}}.jpg",
+            "likes_count": 118,
+            "comments_count": 23,
+            "liked_by_me": true,
+            "created_at": "{{isodate}}"
+          }
+        ],
+        "next_cursor": "{{uuid}}",
+        "has_more": true
+      }
+    },
+    {
+      "name": "Create post",
+      "method": "POST",
+      "path": "/posts",
+      "status_code": 201,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 150,
+      "response": {
+        "id": "{{uuid}}",
+        "content": "New post content",
+        "likes_count": 0,
+        "comments_count": 0,
+        "created_at": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Like a post",
+      "method": "POST",
+      "path": "/posts/:post_id/like",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 80,
+      "response": {
+        "post_id": "{{uuid}}",
+        "liked": true,
+        "likes_count": 43
+      }
+    },
+    {
+      "name": "Follow user",
+      "method": "POST",
+      "path": "/users/:username/follow",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 100,
+      "response": {
+        "following": true,
+        "followers_count": 1241
+      }
+    },
+    {
+      "name": "Get followers",
+      "method": "GET",
+      "path": "/users/:username/followers",
+      "status_code": 200,
+      "headers": { "Content-Type": "application/json" },
+      "delay_ms": 0,
+      "response": {
+        "users": [
+          { "id": "{{uuid}}", "username": "{{word}}_coder", "name": "{{name}}", "avatar_url": "https://avatars.example.com/{{uuid}}", "following_me": true },
+          { "id": "{{uuid}}", "username": "{{word}}_dev",   "name": "{{name}}", "avatar_url": "https://avatars.example.com/{{uuid}}", "following_me": false }
+        ],
+        "total": 1240,
+        "next_cursor": "{{uuid}}"
+      }
+    }
+  ]
+}

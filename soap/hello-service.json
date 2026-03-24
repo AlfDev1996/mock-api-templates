@@ -1,0 +1,36 @@
+{
+  "name": "SOAP Hello Service",
+  "description": "A simple SOAP mock service with a HelloWorld operation. Good for testing SOAP client setup and WS-Security headers.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_soap.html",
+  "note": "For SOAP mocks on MockHub, upload the WSDL file at the URL above. The JSON below documents the expected request/response structure.",
+  "service": {
+    "name": "HelloService",
+    "namespace": "http://hello.example.com/",
+    "endpoint": "/soap/hello"
+  },
+  "operations": [
+    {
+      "name": "SayHello",
+      "input": {
+        "envelope": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:hel=\"http://hello.example.com/\">\n  <soapenv:Header/>\n  <soapenv:Body>\n    <hel:SayHello>\n      <name>World</name>\n    </hel:SayHello>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      },
+      "mock_response": {
+        "status_code": 200,
+        "headers": { "Content-Type": "text/xml; charset=utf-8" },
+        "envelope": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soapenv:Body>\n    <SayHelloResponse>\n      <message>Hello, World! Request ID: {{uuid}}, Time: {{isodate}}</message>\n    </SayHelloResponse>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      }
+    },
+    {
+      "name": "SayHello (fault scenario)",
+      "input": {
+        "description": "Simulates a SOAP Fault when an invalid name is provided"
+      },
+      "mock_response": {
+        "status_code": 500,
+        "headers": { "Content-Type": "text/xml; charset=utf-8" },
+        "envelope": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soapenv:Body>\n    <soapenv:Fault>\n      <faultcode>soapenv:Client</faultcode>\n      <faultstring>Invalid input: name cannot be empty</faultstring>\n      <detail>\n        <errorCode>INVALID_INPUT</errorCode>\n        <timestamp>{{isodate}}</timestamp>\n      </detail>\n    </soapenv:Fault>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      }
+    }
+  ],
+  "wsdl_sample": "See hello-service.wsdl in this directory"
+}
