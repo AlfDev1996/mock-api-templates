@@ -19,6 +19,7 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    environment: mockhub-template-api
     permissions:
       contents: write
 
