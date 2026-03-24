@@ -21,6 +21,7 @@ from datetime import datetime
 from pathlib import Path
 
 import anthropic
+from json_repair import repair_json
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
@@ -143,10 +144,15 @@ def generate_template(topic):
 
     try:
         data = json.loads(raw)
-    except json.JSONDecodeError as e:
-        log.error(f"Invalid JSON from Claude: {e}")
-        log.error(f"Raw output: {raw[:500]}")
-        raise
+    except json.JSONDecodeError:
+        log.warning("JSON has errors, attempting auto-repair...")
+        try:
+            data = json.loads(repair_json(raw))
+            log.info("JSON repaired successfully")
+        except Exception as e:
+            log.error(f"Could not repair JSON: {e}")
+            log.error(f"Raw output: {raw[:500]}")
+            raise
 
     log.info(f"Generated {len(data.get('endpoints', []))} endpoints")
     return data
