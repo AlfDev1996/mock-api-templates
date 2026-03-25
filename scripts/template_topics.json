@@ -4,7 +4,8 @@
     "category": "messaging",
     "name": "Messaging & Chat API",
     "description": "Chat messages, conversations, channels, direct messages, typing indicators",
-    "published": false
+    "published": true,
+    "published_at": "2026-03-25"
   },
   {
     "slug": "blog-cms-api",

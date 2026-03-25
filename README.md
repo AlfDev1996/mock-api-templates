@@ -6,7 +6,7 @@
 [![MockHub](https://img.shields.io/badge/Powered%20by-MockHub-0d6efd)](https://mockhub.ovh)
 [![Templates](https://img.shields.io/badge/Templates-11-brightgreen)](#-all-templates)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Last updated](https://img.shields.io/github/last-commit/AlfDev1996/mock-api-templates)](https://github.com/AlfDev1996/mock-api-templates/commits/main)
+**Last updated: 2026-03-25** · [![Last updated](https://img.shields.io/github/last-commit/AlfDev1996/mock-api-templates)](https://github.com/AlfDev1996/mock-api-templates/commits/main)
 
 ---
 
@@ -174,6 +174,14 @@ Each endpoint can have **multiple scenarios** (different status codes / response
 | Shareable public URL | ✅ | ✅ | ❌ | ❌ |
 
 ---
+
+
+## 🔄 More Templates
+
+<!-- AUTO-GENERATED TEMPLATES -->
+| Template | Endpoints | Description |
+|----------|-----------|-------------|
+| [messaging/messaging-api.json](messaging/messaging-api.json) | 12 | Full-featured messaging API supporting chat messages, conversations, channels, d |
 
 ## Contributing
 

@@ -1,0 +1,707 @@
+{
+  "name": "Messaging & Chat API",
+  "description": "Full-featured messaging API supporting chat messages, conversations, channels, direct messages, typing indicators, read receipts, and user presence management.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "List Channels",
+      "method": "GET",
+      "path": "/messaging/channels",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "channels": [
+            {
+              "id": "{{uuid}}",
+              "name": "general",
+              "description": "General discussion for the entire team",
+              "type": "public",
+              "created_by": {
+                "id": "{{uuid}}",
+                "username": "{{firstname}}",
+                "avatar_url": "{{url}}"
+              },
+              "member_count": "{{integer}}",
+              "unread_count": 3,
+              "is_archived": false,
+              "is_muted": false,
+              "last_message": {
+                "id": "{{uuid}}",
+                "content": "{{sentence}}",
+                "sender": {
+                  "id": "{{uuid}}",
+                  "username": "{{firstname}}",
+                  "avatar_url": "{{url}}"
+                },
+                "sent_at": "{{isodate}}"
+              },
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "name": "engineering",
+              "description": "Engineering team discussions and updates",
+              "type": "private",
+              "created_by": {
+                "id": "{{uuid}}",
+                "username": "{{firstname}}",
+                "avatar_url": "{{url}}"
+              },
+              "member_count": "{{integer}}",
+              "unread_count": 0,
+              "is_archived": false,
+              "is_muted": true,
+              "last_message": {
+                "id": "{{uuid}}",
+                "content": "{{sentence}}",
+                "sender": {
+                  "id": "{{uuid}}",
+                  "username": "{{firstname}}",
+                  "avatar_url": "{{url}}"
+                },
+                "sent_at": "{{isodate}}"
+              },
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "name": "design",
+              "description": "Design team collaboration and feedback",
+              "type": "public",
+              "created_by": {
+                "id": "{{uuid}}",
+                "username": "{{firstname}}",
+                "avatar_url": "{{url}}"
+              },
+              "member_count": "{{integer}}",
+              "unread_count": 12,
+              "is_archived": false,
+              "is_muted": false,
+              "last_message": {
+                "id": "{{uuid}}",
+                "content": "{{sentence}}",
+                "sender": {
+                  "id": "{{uuid}}",
+                  "username": "{{firstname}}",
+                  "avatar_url": "{{url}}"
+                },
+                "sent_at": "{{isodate}}"
+              },
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            }
+          ],
+          "pagination": {
+            "page": 1,
+            "per_page": 25,
+            "total": 47,
+            "total_pages": 2
+          }
+        }
+      }
+    },
+    {
+      "name": "Create Channel",
+      "method": "POST",
+      "path": "/messaging/channels",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 180,
+      "response": {
+        "success": true,
+        "data": {
+          "id": "{{uuid}}",
+          "name": "{{word}}-team",
+          "description": "{{sentence}}",
+          "type": "public",
+          "created_by": {
+            "id": "{{uuid}}",
+            "username": "{{firstname}}",
+            "email": "{{email}}",
+            "avatar_url": "{{url}}"
+          },
+          "member_count": 1,
+          "unread_count": 0,
+          "is_archived": false,
+          "is_muted": false,
+          "settings": {
+            "allow_threads": true,
+            "allow_reactions": true,
+            "allow_file_uploads": true,
+            "max_file_size_mb": 25,
+            "message_retention_days": 365
+          },
+          "last_message": null,
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        },
+        "message": "Channel created successfully"
+      }
+    },
+    {
+      "name": "Get Channel Details",
+      "method": "GET",
+      "path": "/messaging/channels/:channel_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "id": "{{uuid}}",
+          "name": "engineering",
+          "description": "Engineering team discussions, code reviews, and technical decisions",
+          "type": "private",
+          "topic": "Sprint 42 - Focus on performance optimization",
+          "created_by": {
+            "id": "{{uuid}}",
+            "username": "{{firstname}}",
+            "email": "{{email}}",
+            "avatar_url": "{{url}}"
+          },
+          "member_count": "{{integer}}",
+          "unread_count": 5,
+          "is_archived": false,
+          "is_muted": false,
+          "pinned_messages_count": 3,
+          "members": [
+            {
+              "id": "{{uuid}}",
+              "username": "{{firstname}}",
+              "email": "{{email}}",
+              "avatar_url": "{{url}}",
+              "role": "admin",
+              "status": "online",
+              "joined_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "username": "{{firstname}}",
+              "email": "{{email}}",
+              "avatar_url": "{{url}}",
+              "role": "member",
+              "status": "away",
+              "joined_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "username": "{{firstname}}",
+              "email": "{{email}}",
+              "avatar_url": "{{url}}",
+              "role": "member",
+              "status": "offline",
+              "joined_at": "{{isodate}}"
+            }
+          ],
+          "settings": {
+            "allow_threads": true,
+            "allow_reactions": true,
+            "allow_file_uploads": true,
+            "max_file_size_mb": 25,
+            "message_retention_days": 365
+          },
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Get Channel Not Found",
+      "method": "GET",
+      "path": "/messaging/channels/:channel_id/not-found",
+      "status_code": 404,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": false,
+        "error": {
+          "code": "CHANNEL_NOT_FOUND",
+          "message": "The requested channel does not exist or has been deleted.",
+          "details": {
+            "channel_id": "{{uuid}}",
+            "suggestion": "Verify the channel ID or check if the channel was archived."
+          },
+          "timestamp": "{{isodate}}",
+          "trace_id": "{{uuid}}"
+        }
+      }
+    },
+    {
+      "name": "List Messages in Channel",
+      "method": "GET",
+      "path": "/messaging/channels/:channel_id/messages",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "messages": [
+            {
+              "id": "{{uuid}}",
+              "channel_id": "{{uuid}}",
+              "type": "text",
+              "content": "{{sentence}}",
+              "sender": {
+                "id": "{{uuid}}",
+                "username": "{{firstname}}",
+                "display_name": "{{name}}",
+                "avatar_url": "{{url}}",
+                "status": "online"
+              },
+              "thread": null,
+              "reactions": [
+                {
+                  "emoji": "👍",
+                  "count": 3,
+                  "users": [
+                    "{{uuid}}",
+                    "{{uuid}}",
+                    "{{uuid}}"
+                  ]
+                },
+                {
+                  "emoji": "🎉",
+                  "count": 1,
+                  "users": [
+                    "{{uuid}}"
+                  ]
+                }
+              ],
+              "attachments": [],
+              "is_edited": false,
+              "is_pinned": false,
+              "read_by_count": "{{integer}}",
+              "sent_at": "{{isodate}}",
+              "edited_at": null
+            },
+            {
+              "id": "{{uuid}}",
+              "channel_id": "{{uuid}}",
+              "type": "text",
+              "content": "{{sentence}}",
+              "sender": {
+                "id": "{{uuid}}",
+                "username": "{{firstname}}",
+                "display_name": "{{name}}",
+                "avatar_url": "{{url}}",
+                "status": "away"
+              },
+              "thread": {
+                "reply_count": 4,
+                "last_reply_at": "{{isodate}}",
+                "participant_ids": [
+                  "{{uuid}}",
+                  "{{uuid}}",
+                  "{{uuid}}"
+                ]
+              },
+              "reactions": [],
+              "attachments": [
+                {
+                  "id": "{{uuid}}",
+                  "type": "image",
+                  "filename": "screenshot.png",
+                  "mime_type": "image/png",
+                  "size_bytes": 245890,
+                  "url": "{{url}}",
+                  "thumbnail_url": "{{url}}"
+                }
+              ],
+              "is_edited": true,
+              "is_pinned": false,
+              "read_by_count": "{{integer}}",
+              "sent_at": "{{isodate}}",
+              "edited_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "channel_id": "{{uuid}}",
+              "type": "system",
+              "content": "{{firstname}} joined the channel",
+              "sender": null,
+              "thread": null,
+              "reactions": [],
+              "attachments": [],
+              "is_edited": false,
+              "is_pinned": false,
+              "read_by_count": "{{integer}}",
+              "sent_at": "{{isodate}}",
+              "edited_at": null
+            },
+            {
+              "id": "{{uuid}}",
+              "channel_id": "{{uuid}}",
+              "type": "text",
+              "content": "{{sentence}}",
+              "sender": {
+                "id": "{{uuid}}",
+                "username": "{{firstname}}",
+                "display_name": "{{name}}",
+                "avatar_url": "{{url}}",
+                "status": "online"
+              },
+              "thread": null,
+              "reactions": [
+                {
+                  "emoji": "❤️",
+                  "count": 2,
+                  "users": [
+                    "{{uuid}}",
+                    "{{uuid}}"
+                  ]
+                }
+              ],
+              "attachments": [
+                {
+                  "id": "{{uuid}}",
+                  "type": "file",
+                  "filename": "report-q4.pdf",
+                  "mime_type": "application/pdf",
+                  "size_bytes": 1048576,
+                  "url": "{{url}}",
+                  "thumbnail_url": null
+                }
+              ],
+              "is_edited": false,
+              "is_pinned": true,
+              "read_by_count": "{{integer}}",
+              "sent_at": "{{isodate}}",
+              "edited_at": null
+            }
+          ],
+          "pagination": {
+            "cursor": "{{uuid}}",
+            "has_more": true,
+            "limit": 50
+          }
+        }
+      }
+    },
+    {
+      "name": "Send Message to Channel",
+      "method": "POST",
+      "path": "/messaging/channels/:channel_id/messages",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 120,
+      "response": {
+        "success": true,
+        "data": {
+          "id": "{{uuid}}",
+          "channel_id": "{{uuid}}",
+          "type": "text",
+          "content": "{{sentence}}",
+          "sender": {
+            "id": "{{uuid}}",
+            "username": "{{firstname}}",
+            "display_name": "{{name}}",
+            "avatar_url": "{{url}}",
+            "status": "online"
+          },
+          "thread": null,
+          "reactions": [],
+          "attachments": [],
+          "mentions": [
+            {
+              "user_id": "{{uuid}}",
+              "username": "{{firstname}}",
+              "offset": 10,
+              "length": 8
+            }
+          ],
+          "is_edited": false,
+          "is_pinned": false,
+          "read_by_count": 0,
+          "sent_at": "{{isodate}}",
+          "edited_at": null
+        },
+        "message": "Message sent successfully"
+      }
+    },
+    {
+      "name": "Edit Message",
+      "method": "PATCH",
+      "path": "/messaging/channels/:channel_id/messages/:message_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 150,
+      "response": {
+        "success": true,
+        "data": {
+          "id": "{{uuid}}",
+          "channel_id": "{{uuid}}",
+          "type": "text",
+          "content": "{{sentence}}",
+          "sender": {
+            "id": "{{uuid}}",
+            "username": "{{firstname}}",
+            "display_name": "{{name}}",
+            "avatar_url": "{{url}}"
+          },
+          "is_edited": true,
+          "edit_history": [
+            {
+              "content": "{{sentence}}",
+              "edited_at": "{{isodate}}"
+            }
+          ],
+          "sent_at": "{{isodate}}",
+          "edited_at": "{{isodate}}"
+        },
+        "message": "Message updated successfully"
+      }
+    },
+    {
+      "name": "Delete Message",
+      "method": "DELETE",
+      "path": "/messaging/channels/:channel_id/messages/:message_id",
+      "status_code": 204,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 100,
+      "response": {}
+    },
+    {
+      "name": "Send Message - Forbidden",
+      "method": "POST",
+      "path": "/messaging/channels/:channel_id/messages/forbidden",
+      "status_code": 403,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 80,
+      "response": {
+        "success": false,
+        "error": {
+          "code": "CHANNEL_ACCESS_DENIED",
+          "message": "You do not have permission to send messages in this channel.",
+          "details": {
+            "channel_id": "{{uuid}}",
+            "user_id": "{{uuid}}",
+            "required_role": "member",
+            "current_role": "guest",
+            "suggestion": "Request access from a channel administrator."
+          },
+          "timestamp": "{{isodate}}",
+          "trace_id": "{{uuid}}"
+        }
+      }
+    },
+    {
+      "name": "List Direct Message Conversations",
+      "method": "GET",
+      "path": "/messaging/direct-messages",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "conversations": [
+            {
+              "id": "{{uuid}}",
+              "type": "direct",
+              "participant": {
+                "id": "{{uuid}}",
+                "username": "{{firstname}}",
+                "display_name": "{{name}}",
+                "email": "{{email}}",
+                "avatar_url": "{{url}}",
+                "status": "online",
+                "last_seen_at": "{{isodate}}"
+              },
+              "unread_count": 2,
+              "is_muted": false,
+              "last_message": {
+                "id": "{{uuid}}",
+                "content": "{{sentence}}",
+                "sent_by_me": false,
+                "sent_at": "{{isodate}}"
+              },
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "type": "direct",
+              "participant": {
+                "id": "{{uuid}}",
+                "username": "{{firstname}}",
+                "display_name": "{{name}}",
+                "email": "{{email}}",
+                "avatar_url": "{{url}}",
+                "status": "offline",
+                "last_seen_at": "{{isodate}}"
+              },
+              "unread_count": 0,
+              "is_muted": false,
+              "last_message": {
+                "id": "{{uuid}}",
+                "content": "{{sentence}}",
+                "sent_by_me": true,
+                "sent_at": "{{isodate}}"
+              },
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "type": "group",
+              "participants": [
+                {
+                  "id": "{{uuid}}",
+                  "username": "{{firstname}}",
+                  "display_name": "{{name}}",
+                  "avatar_url": "{{url}}",
+                  "status": "online"
+                },
+                {
+                  "id": "{{uuid}}",
+                  "username": "{{firstname}}",
+                  "display_name": "{{name}}",
+                  "avatar_url": "{{url}}",
+                  "status": "away"
+                }
+              ],
+              "group_name": "Project Alpha Team",
+              "unread_count": 8,
+              "is_muted": true,
+              "last_message": {
+                "id": "{{uuid}}",
+                "content": "{{sentence}}",
+                "sent_by_me": false,
+                "sent_at": "{{isodate}}"
+              },
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            }
+          ],
+          "pagination": {
+            "page": 1,
+            "per_page": 20,
+            "total": 15,
+            "total_pages": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "Send Direct Message",
+      "method": "POST",
+      "path": "/messaging/direct-messages/:conversation_id/messages",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 100,
+      "response": {
+        "success": true,
+        "data": {
+          "id": "{{uuid}}",
+          "conversation_id": "{{uuid}}",
+          "type": "text",
+          "content": "{{sentence}}",
+          "sender": {
+            "id": "{{uuid}}",
+            "username": "{{firstname}}",
+            "display_name": "{{name}}",
+            "avatar_url": "{{url}}"
+          },
+          "recipient": {
+            "id": "{{uuid}}",
+            "username": "{{firstname}}",
+            "display_name": "{{name}}",
+            "avatar_url": "{{url}}"
+          },
+          "attachments": [],
+          "reactions": [],
+          "is_read": false,
+          "read_at": null,
+          "delivered_at": null,
+          "sent_at": "{{isodate}}"
+        },
+        "message": "Direct message sent successfully"
+      }
+    },
+    {
+      "name": "Get Direct Message History",
+      "method": "GET",
+      "path": "/messaging/direct-messages/:conversation_id/messages",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "messages": [
+            {
+              "id": "{{uuid}}",
+              "conversation_id": "{{uuid}}",
+              "type": "text",
+              "content": "{{sentence}}",
+              "sender": {
+                "id": "{{uuid}}",
+                "username": "{{firstname}}",
+                "display_name": "{{name}}",
+                "avatar_url": "{{url}}"
+              },
+              "is_read": true,
+              "read_at": "{{isodate}}",
+              "delivered_at": "{{isodate}}",
+              "sent_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "conversation_id": "{{uuid}}",
+              "type": "text",
+              "content": "{{sentence}}",
+              "sender": {
+                "id": "{{uuid}}",
+                "username": "{{firstname}}",
+                "display_name": "{{name}}",
+                "avatar_url": "{{url}}"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
