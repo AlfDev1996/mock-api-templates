@@ -1,0 +1,669 @@
+{
+  "name": "Blog / CMS API",
+  "description": "Complete blog and content management system API with posts, categories, tags, authors, comments, drafts, and publish flow",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "List All Posts",
+      "method": "GET",
+      "path": "/cms/posts",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Total-Count": "142",
+        "X-Page": "1",
+        "X-Per-Page": "20"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": [
+          {
+            "id": "{{uuid}}",
+            "title": "{{sentence}}",
+            "slug": "{{word}}-{{word}}-{{word}}",
+            "excerpt": "{{sentence}}",
+            "content": "{{sentence}} {{sentence}} {{sentence}} {{sentence}}",
+            "featured_image": "{{url}}",
+            "status": "published",
+            "visibility": "public",
+            "author": {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "avatar": "{{url}}",
+              "bio": "{{sentence}}",
+              "job_title": "{{jobtitle}}"
+            },
+            "category": {
+              "id": "{{uuid}}",
+              "name": "{{word}}",
+              "slug": "{{word}}",
+              "color": "{{color}}"
+            },
+            "tags": [
+              {
+                "id": "{{uuid}}",
+                "name": "{{word}}",
+                "slug": "{{word}}"
+              },
+              {
+                "id": "{{uuid}}",
+                "name": "{{word}}",
+                "slug": "{{word}}"
+              },
+              {
+                "id": "{{uuid}}",
+                "name": "{{word}}",
+                "slug": "{{word}}"
+              }
+            ],
+            "comments_count": "{{integer}}",
+            "views_count": "{{integer}}",
+            "likes_count": "{{integer}}",
+            "reading_time_minutes": "{{integer}}",
+            "is_featured": "{{boolean}}",
+            "allow_comments": true,
+            "meta": {
+              "seo_title": "{{sentence}}",
+              "seo_description": "{{sentence}}",
+              "og_image": "{{url}}"
+            },
+            "published_at": "{{isodate}}",
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "title": "{{sentence}}",
+            "slug": "{{word}}-{{word}}-{{word}}",
+            "excerpt": "{{sentence}}",
+            "content": "{{sentence}} {{sentence}} {{sentence}} {{sentence}}",
+            "featured_image": "{{url}}",
+            "status": "published",
+            "visibility": "public",
+            "author": {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "avatar": "{{url}}",
+              "bio": "{{sentence}}",
+              "job_title": "{{jobtitle}}"
+            },
+            "category": {
+              "id": "{{uuid}}",
+              "name": "{{word}}",
+              "slug": "{{word}}",
+              "color": "{{color}}"
+            },
+            "tags": [
+              {
+                "id": "{{uuid}}",
+                "name": "{{word}}",
+                "slug": "{{word}}"
+              },
+              {
+                "id": "{{uuid}}",
+                "name": "{{word}}",
+                "slug": "{{word}}"
+              }
+            ],
+            "comments_count": "{{integer}}",
+            "views_count": "{{integer}}",
+            "likes_count": "{{integer}}",
+            "reading_time_minutes": "{{integer}}",
+            "is_featured": "{{boolean}}",
+            "allow_comments": true,
+            "meta": {
+              "seo_title": "{{sentence}}",
+              "seo_description": "{{sentence}}",
+              "og_image": "{{url}}"
+            },
+            "published_at": "{{isodate}}",
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "title": "{{sentence}}",
+            "slug": "{{word}}-{{word}}-{{word}}",
+            "excerpt": "{{sentence}}",
+            "content": "{{sentence}} {{sentence}} {{sentence}} {{sentence}}",
+            "featured_image": "{{url}}",
+            "status": "draft",
+            "visibility": "private",
+            "author": {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "avatar": "{{url}}",
+              "bio": "{{sentence}}",
+              "job_title": "{{jobtitle}}"
+            },
+            "category": {
+              "id": "{{uuid}}",
+              "name": "{{word}}",
+              "slug": "{{word}}",
+              "color": "{{color}}"
+            },
+            "tags": [
+              {
+                "id": "{{uuid}}",
+                "name": "{{word}}",
+                "slug": "{{word}}"
+              }
+            ],
+            "comments_count": 0,
+            "views_count": 0,
+            "likes_count": 0,
+            "reading_time_minutes": "{{integer}}",
+            "is_featured": false,
+            "allow_comments": true,
+            "meta": {
+              "seo_title": "{{sentence}}",
+              "seo_description": "{{sentence}}",
+              "og_image": null
+            },
+            "published_at": null,
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          }
+        ],
+        "pagination": {
+          "current_page": 1,
+          "per_page": 20,
+          "total_items": 142,
+          "total_pages": 8,
+          "has_next": true,
+          "has_previous": false
+        }
+      }
+    },
+    {
+      "name": "Get Single Post",
+      "method": "GET",
+      "path": "/cms/posts/:post_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "Cache-Control": "public, max-age=300"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "id": "{{uuid}}",
+          "title": "{{sentence}}",
+          "slug": "{{word}}-{{word}}-{{word}}-{{word}}",
+          "excerpt": "{{sentence}}",
+          "content": "{{sentence}} {{sentence}} {{sentence}} {{sentence}} {{sentence}} {{sentence}} {{sentence}} {{sentence}}",
+          "content_html": "<p>{{sentence}}</p><p>{{sentence}}</p><h2>{{sentence}}</h2><p>{{sentence}} {{sentence}}</p><blockquote>{{sentence}}</blockquote><p>{{sentence}} {{sentence}}</p>",
+          "featured_image": "{{url}}",
+          "featured_image_alt": "{{sentence}}",
+          "status": "published",
+          "visibility": "public",
+          "post_type": "article",
+          "author": {
+            "id": "{{uuid}}",
+            "first_name": "{{firstname}}",
+            "last_name": "{{lastname}}",
+            "email": "{{email}}",
+            "avatar": "{{url}}",
+            "bio": "{{sentence}} {{sentence}}",
+            "job_title": "{{jobtitle}}",
+            "company": "{{company}}",
+            "website": "{{url}}",
+            "social_links": {
+              "twitter": "{{url}}",
+              "linkedin": "{{url}}",
+              "github": "{{url}}"
+            },
+            "posts_count": "{{integer}}"
+          },
+          "category": {
+            "id": "{{uuid}}",
+            "name": "{{word}}",
+            "slug": "{{word}}",
+            "description": "{{sentence}}",
+            "color": "{{color}}",
+            "post_count": "{{integer}}"
+          },
+          "tags": [
+            {
+              "id": "{{uuid}}",
+              "name": "{{word}}",
+              "slug": "{{word}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "name": "{{word}}",
+              "slug": "{{word}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "name": "{{word}}",
+              "slug": "{{word}}"
+            }
+          ],
+          "comments_count": "{{integer}}",
+          "views_count": "{{integer}}",
+          "likes_count": "{{integer}}",
+          "shares_count": "{{integer}}",
+          "reading_time_minutes": "{{integer}}",
+          "word_count": "{{integer}}",
+          "is_featured": "{{boolean}}",
+          "is_pinned": false,
+          "allow_comments": true,
+          "meta": {
+            "seo_title": "{{sentence}}",
+            "seo_description": "{{sentence}}",
+            "canonical_url": "{{url}}",
+            "og_image": "{{url}}",
+            "og_type": "article",
+            "robots": "index, follow",
+            "schema_type": "BlogPosting"
+          },
+          "related_posts": [
+            {
+              "id": "{{uuid}}",
+              "title": "{{sentence}}",
+              "slug": "{{word}}-{{word}}-{{word}}",
+              "excerpt": "{{sentence}}",
+              "featured_image": "{{url}}",
+              "published_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "title": "{{sentence}}",
+              "slug": "{{word}}-{{word}}-{{word}}",
+              "excerpt": "{{sentence}}",
+              "featured_image": "{{url}}",
+              "published_at": "{{isodate}}"
+            }
+          ],
+          "revision_count": "{{integer}}",
+          "published_at": "{{isodate}}",
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Get Post - Not Found",
+      "method": "GET",
+      "path": "/cms/posts/:post_id/not-found",
+      "status_code": 404,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": false,
+        "error": {
+          "code": "POST_NOT_FOUND",
+          "message": "The requested post could not be found",
+          "details": "No post exists with the provided identifier. It may have been deleted or the URL is incorrect.",
+          "suggestion": "Check the post ID or slug and try again",
+          "request_id": "{{uuid}}",
+          "timestamp": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Create New Post (Draft)",
+      "method": "POST",
+      "path": "/cms/posts",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "Location": "/cms/posts/{{uuid}}"
+      },
+      "delay_ms": 200,
+      "response": {
+        "success": true,
+        "message": "Post created successfully as draft",
+        "data": {
+          "id": "{{uuid}}",
+          "title": "{{sentence}}",
+          "slug": "{{word}}-{{word}}-{{word}}-{{word}}",
+          "excerpt": "{{sentence}}",
+          "content": "{{sentence}} {{sentence}} {{sentence}} {{sentence}} {{sentence}}",
+          "featured_image": "{{url}}",
+          "status": "draft",
+          "visibility": "private",
+          "post_type": "article",
+          "author": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}",
+            "avatar": "{{url}}"
+          },
+          "category": {
+            "id": "{{uuid}}",
+            "name": "{{word}}",
+            "slug": "{{word}}"
+          },
+          "tags": [
+            {
+              "id": "{{uuid}}",
+              "name": "{{word}}",
+              "slug": "{{word}}"
+            }
+          ],
+          "comments_count": 0,
+          "views_count": 0,
+          "likes_count": 0,
+          "is_featured": false,
+          "allow_comments": true,
+          "meta": {
+            "seo_title": "{{sentence}}",
+            "seo_description": "{{sentence}}",
+            "og_image": null
+          },
+          "revision_number": 1,
+          "published_at": null,
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Create Post - Validation Error",
+      "method": "POST",
+      "path": "/cms/posts/invalid",
+      "status_code": 422,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 100,
+      "response": {
+        "success": false,
+        "error": {
+          "code": "VALIDATION_ERROR",
+          "message": "The provided data failed validation",
+          "errors": [
+            {
+              "field": "title",
+              "rule": "required",
+              "message": "Title is required and cannot be empty"
+            },
+            {
+              "field": "content",
+              "rule": "min_length",
+              "message": "Content must be at least 50 characters long",
+              "constraint": 50
+            },
+            {
+              "field": "category_id",
+              "rule": "exists",
+              "message": "The selected category does not exist"
+            },
+            {
+              "field": "tags",
+              "rule": "max",
+              "message": "A post cannot have more than 10 tags",
+              "constraint": 10
+            }
+          ],
+          "request_id": "{{uuid}}",
+          "timestamp": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Update Post",
+      "method": "PUT",
+      "path": "/cms/posts/:post_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 180,
+      "response": {
+        "success": true,
+        "message": "Post updated successfully",
+        "data": {
+          "id": "{{uuid}}",
+          "title": "{{sentence}}",
+          "slug": "{{word}}-{{word}}-{{word}}-{{word}}",
+          "excerpt": "{{sentence}}",
+          "content": "{{sentence}} {{sentence}} {{sentence}} {{sentence}} {{sentence}} {{sentence}}",
+          "featured_image": "{{url}}",
+          "status": "draft",
+          "visibility": "private",
+          "author": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          },
+          "category": {
+            "id": "{{uuid}}",
+            "name": "{{word}}",
+            "slug": "{{word}}"
+          },
+          "tags": [
+            {
+              "id": "{{uuid}}",
+              "name": "{{word}}",
+              "slug": "{{word}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "name": "{{word}}",
+              "slug": "{{word}}"
+            }
+          ],
+          "revision_number": "{{integer}}",
+          "published_at": null,
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Publish Post",
+      "method": "PATCH",
+      "path": "/cms/posts/:post_id/publish",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 250,
+      "response": {
+        "success": true,
+        "message": "Post published successfully",
+        "data": {
+          "id": "{{uuid}}",
+          "title": "{{sentence}}",
+          "slug": "{{word}}-{{word}}-{{word}}-{{word}}",
+          "status": "published",
+          "visibility": "public",
+          "previous_status": "draft",
+          "author": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          },
+          "category": {
+            "id": "{{uuid}}",
+            "name": "{{word}}",
+            "slug": "{{word}}"
+          },
+          "permalink": "{{url}}",
+          "published_at": "{{isodate}}",
+          "published_by": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "role": "editor"
+          },
+          "notifications_sent": true,
+          "sitemap_updated": true,
+          "social_shares_queued": true,
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Unpublish Post (Revert to Draft)",
+      "method": "PATCH",
+      "path": "/cms/posts/:post_id/unpublish",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 150,
+      "response": {
+        "success": true,
+        "message": "Post reverted to draft",
+        "data": {
+          "id": "{{uuid}}",
+          "title": "{{sentence}}",
+          "slug": "{{word}}-{{word}}-{{word}}",
+          "status": "draft",
+          "previous_status": "published",
+          "visibility": "private",
+          "unpublished_at": "{{isodate}}",
+          "unpublished_by": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "role": "editor"
+          },
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Delete Post",
+      "method": "DELETE",
+      "path": "/cms/posts/:post_id",
+      "status_code": 204,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 150,
+      "response": {}
+    },
+    {
+      "name": "List Categories",
+      "method": "GET",
+      "path": "/cms/categories",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": [
+          {
+            "id": "{{uuid}}",
+            "name": "{{word}}",
+            "slug": "{{word}}",
+            "description": "{{sentence}}",
+            "color": "{{color}}",
+            "icon": "{{word}}",
+            "parent_id": null,
+            "post_count": "{{integer}}",
+            "is_active": true,
+            "sort_order": 1,
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{word}}",
+            "slug": "{{word}}",
+            "description": "{{sentence}}",
+            "color": "{{color}}",
+            "icon": "{{word}}",
+            "parent_id": null,
+            "post_count": "{{integer}}",
+            "is_active": true,
+            "sort_order": 2,
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{word}}",
+            "slug": "{{word}}",
+            "description": "{{sentence}}",
+            "color": "{{color}}",
+            "icon": "{{word}}",
+            "parent_id": "{{uuid}}",
+            "post_count": "{{integer}}",
+            "is_active": true,
+            "sort_order": 3,
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{word}}",
+            "slug": "{{word}}",
+            "description": "{{sentence}}",
+            "color": "{{color}}",
+            "icon": "{{word}}",
+            "parent_id": null,
+            "post_count": "{{integer}}",
+            "is_active": "{{boolean}}",
+            "sort_order": 4,
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          }
+        ],
+        "total": 4
+      }
+    },
+    {
+      "name": "Create Category",
+      "method": "POST",
+      "path": "/cms/categories",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 120,
+      "response": {
+        "success": true,
+        "message": "Category created successfully",
+        "data": {
+          "id": "{{uuid}}",
+          "name": "{{word}}",
+          "slug": "{{word}}",
+          "description": "{{sentence}}",
+          "color": "{{color}}",
+          "icon": "{{word}}",
+          "parent_id": null,
+          "post_count": 0,
+          "is_active": true,
+          "sort_order": "{{integer}}",
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Update Category",
+      "method": "PUT",
+      "path": "/cms/categories/:category_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 130,
+      "response": {
+        "success": true,
+        "message": "Category updated successfully",
+        "data": {
+          "id": "{{uuid}}",
+          "name": "{{word}}",
+          "slug": "{{word}}",
+          "description": "{{sentence}}",
+          "color": "{{color}"
+        }
+      }
+    }
+  ]
+}

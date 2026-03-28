@@ -12,7 +12,8 @@
     "category": "cms",
     "name": "Blog / CMS API",
     "description": "Posts, categories, tags, authors, comments, drafts, publish flow",
-    "published": false
+    "published": true,
+    "published_at": "2026-03-28"
   },
   {
     "slug": "inventory-api",
