@@ -6,7 +6,7 @@
 [![MockHub](https://img.shields.io/badge/Powered%20by-MockHub-0d6efd)](https://mockhub.ovh)
 [![Templates](https://img.shields.io/badge/Templates-11-brightgreen)](#-all-templates)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-**Last updated: 2026-03-28** · [![Last updated](https://img.shields.io/github/last-commit/AlfDev1996/mock-api-templates)](https://github.com/AlfDev1996/mock-api-templates/commits/main)
+**Last updated: 2026-03-31** · [![Last updated](https://img.shields.io/github/last-commit/AlfDev1996/mock-api-templates)](https://github.com/AlfDev1996/mock-api-templates/commits/main)
 
 ---
 
@@ -179,6 +179,7 @@ Each endpoint can have **multiple scenarios** (different status codes / response
 ## 🔄 More Templates
 
 <!-- AUTO-GENERATED TEMPLATES -->
+| [ecommerce/inventory-api.json](ecommerce/inventory-api.json) | 9 | Warehouses, stock levels, SKUs, suppliers, purchase orders, low-stock alerts |
 | [cms/blog-cms-api.json](cms/blog-cms-api.json) | 12 | Complete blog and content management system API with posts, categories, tags, au |
 | Template | Endpoints | Description |
 |----------|-----------|-------------|

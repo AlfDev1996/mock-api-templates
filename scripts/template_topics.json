@@ -20,7 +20,8 @@
     "category": "ecommerce",
     "name": "Inventory Management API",
     "description": "Warehouses, stock levels, SKUs, suppliers, purchase orders, low-stock alerts",
-    "published": false
+    "published": true,
+    "published_at": "2026-03-31"
   },
   {
     "slug": "analytics-api",

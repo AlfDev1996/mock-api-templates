@@ -1,0 +1,643 @@
+{
+  "name": "Inventory Management API",
+  "description": "Warehouses, stock levels, SKUs, suppliers, purchase orders, low-stock alerts",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "List Warehouses",
+      "method": "GET",
+      "path": "/api/v1/warehouses",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "meta": {
+          "total": 4,
+          "page": 1,
+          "per_page": 25,
+          "total_pages": 1
+        },
+        "data": [
+          {
+            "id": "{{uuid}}",
+            "name": "{{city}} Distribution Center",
+            "code": "WH-{{integer}}",
+            "address": {
+              "street": "{{integer}} {{word}} Boulevard",
+              "city": "{{city}}",
+              "zipcode": "{{zipcode}}",
+              "country": "{{country}}"
+            },
+            "manager": {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "phone": "{{phone}}"
+            },
+            "capacity_sqft": 125000,
+            "utilization_pct": "{{float}}",
+            "is_active": true,
+            "total_skus": "{{integer}}",
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{city}} Fulfillment Hub",
+            "code": "WH-{{integer}}",
+            "address": {
+              "street": "{{integer}} {{word}} Avenue",
+              "city": "{{city}}",
+              "zipcode": "{{zipcode}}",
+              "country": "{{country}}"
+            },
+            "manager": {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "phone": "{{phone}}"
+            },
+            "capacity_sqft": 87000,
+            "utilization_pct": "{{float}}",
+            "is_active": true,
+            "total_skus": "{{integer}}",
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{city}} Cold Storage Facility",
+            "code": "WH-{{integer}}",
+            "address": {
+              "street": "{{integer}} {{word}} Road",
+              "city": "{{city}}",
+              "zipcode": "{{zipcode}}",
+              "country": "{{country}}"
+            },
+            "manager": {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "phone": "{{phone}}"
+            },
+            "capacity_sqft": 45000,
+            "utilization_pct": "{{float}}",
+            "is_active": true,
+            "total_skus": "{{integer}}",
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{city}} Returns Warehouse",
+            "code": "WH-{{integer}}",
+            "address": {
+              "street": "{{integer}} {{word}} Street",
+              "city": "{{city}}",
+              "zipcode": "{{zipcode}}",
+              "country": "{{country}}"
+            },
+            "manager": {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "phone": "{{phone}}"
+            },
+            "capacity_sqft": 32000,
+            "utilization_pct": "{{float}}",
+            "is_active": false,
+            "total_skus": "{{integer}}",
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Get Warehouse Details",
+      "method": "GET",
+      "path": "/api/v1/warehouses/:warehouse_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "id": "{{uuid}}",
+          "name": "{{city}} Distribution Center",
+          "code": "WH-{{integer}}",
+          "address": {
+            "street": "{{integer}} {{word}} Boulevard",
+            "city": "{{city}}",
+            "zipcode": "{{zipcode}}",
+            "country": "{{country}}"
+          },
+          "manager": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}",
+            "phone": "{{phone}}"
+          },
+          "capacity_sqft": 125000,
+          "utilization_pct": "{{float}}",
+          "is_active": true,
+          "total_skus": "{{integer}}",
+          "zones": [
+            {
+              "zone_code": "A",
+              "label": "General Merchandise",
+              "temperature_controlled": false,
+              "current_items": "{{integer}}"
+            },
+            {
+              "zone_code": "B",
+              "label": "Perishable Goods",
+              "temperature_controlled": true,
+              "current_items": "{{integer}}"
+            },
+            {
+              "zone_code": "C",
+              "label": "High-Value Items",
+              "temperature_controlled": false,
+              "current_items": "{{integer}}"
+            }
+          ],
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Create Warehouse",
+      "method": "POST",
+      "path": "/api/v1/warehouses",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}",
+        "Location": "/api/v1/warehouses/{{uuid}}"
+      },
+      "delay_ms": 200,
+      "response": {
+        "success": true,
+        "message": "Warehouse created successfully.",
+        "data": {
+          "id": "{{uuid}}",
+          "name": "{{city}} Logistics Center",
+          "code": "WH-{{integer}}",
+          "address": {
+            "street": "{{integer}} {{word}} Parkway",
+            "city": "{{city}}",
+            "zipcode": "{{zipcode}}",
+            "country": "{{country}}"
+          },
+          "manager": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}",
+            "phone": "{{phone}}"
+          },
+          "capacity_sqft": 75000,
+          "utilization_pct": 0.0,
+          "is_active": true,
+          "total_skus": 0,
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "List SKUs with Stock Levels",
+      "method": "GET",
+      "path": "/api/v1/skus",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "meta": {
+          "total": 3,
+          "page": 1,
+          "per_page": 50,
+          "total_pages": 1
+        },
+        "data": [
+          {
+            "id": "{{uuid}}",
+            "sku": "SKU-{{integer}}-{{word}}",
+            "name": "{{word}} {{word}} Widget",
+            "description": "{{sentence}}",
+            "category": "Electronics",
+            "unit_price": "{{float}}",
+            "currency": "USD",
+            "weight_kg": "{{float}}",
+            "dimensions": {
+              "length_cm": 30,
+              "width_cm": 20,
+              "height_cm": 10
+            },
+            "barcode": "{{integer}}{{integer}}",
+            "supplier": {
+              "id": "{{uuid}}",
+              "name": "{{company}}",
+              "contact_email": "{{email}}"
+            },
+            "stock_levels": [
+              {
+                "warehouse_id": "{{uuid}}",
+                "warehouse_name": "{{city}} Distribution Center",
+                "quantity_on_hand": "{{integer}}",
+                "quantity_reserved": "{{integer}}",
+                "quantity_available": "{{integer}}",
+                "reorder_point": 50,
+                "reorder_quantity": 200,
+                "bin_location": "A-12-03"
+              },
+              {
+                "warehouse_id": "{{uuid}}",
+                "warehouse_name": "{{city}} Fulfillment Hub",
+                "quantity_on_hand": "{{integer}}",
+                "quantity_reserved": "{{integer}}",
+                "quantity_available": "{{integer}}",
+                "reorder_point": 30,
+                "reorder_quantity": 150,
+                "bin_location": "B-04-11"
+              }
+            ],
+            "total_stock": "{{integer}}",
+            "is_active": true,
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "sku": "SKU-{{integer}}-{{word}}",
+            "name": "{{word}} {{word}} Gadget",
+            "description": "{{sentence}}",
+            "category": "Home & Garden",
+            "unit_price": "{{float}}",
+            "currency": "USD",
+            "weight_kg": "{{float}}",
+            "dimensions": {
+              "length_cm": 45,
+              "width_cm": 35,
+              "height_cm": 25
+            },
+            "barcode": "{{integer}}{{integer}}",
+            "supplier": {
+              "id": "{{uuid}}",
+              "name": "{{company}}",
+              "contact_email": "{{email}}"
+            },
+            "stock_levels": [
+              {
+                "warehouse_id": "{{uuid}}",
+                "warehouse_name": "{{city}} Distribution Center",
+                "quantity_on_hand": "{{integer}}",
+                "quantity_reserved": "{{integer}}",
+                "quantity_available": "{{integer}}",
+                "reorder_point": 25,
+                "reorder_quantity": 100,
+                "bin_location": "C-07-09"
+              }
+            ],
+            "total_stock": "{{integer}}",
+            "is_active": true,
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "sku": "SKU-{{integer}}-{{word}}",
+            "name": "{{word}} {{word}} Tool",
+            "description": "{{sentence}}",
+            "category": "Industrial",
+            "unit_price": "{{float}}",
+            "currency": "USD",
+            "weight_kg": "{{float}}",
+            "dimensions": {
+              "length_cm": 60,
+              "width_cm": 15,
+              "height_cm": 15
+            },
+            "barcode": "{{integer}}{{integer}}",
+            "supplier": {
+              "id": "{{uuid}}",
+              "name": "{{company}}",
+              "contact_email": "{{email}}"
+            },
+            "stock_levels": [
+              {
+                "warehouse_id": "{{uuid}}",
+                "warehouse_name": "{{city}} Fulfillment Hub",
+                "quantity_on_hand": 8,
+                "quantity_reserved": 3,
+                "quantity_available": 5,
+                "reorder_point": 20,
+                "reorder_quantity": 75,
+                "bin_location": "A-01-06"
+              }
+            ],
+            "total_stock": 8,
+            "is_active": true,
+            "low_stock_alert": true,
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Create SKU",
+      "method": "POST",
+      "path": "/api/v1/skus",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 180,
+      "response": {
+        "success": true,
+        "message": "SKU created successfully.",
+        "data": {
+          "id": "{{uuid}}",
+          "sku": "SKU-{{integer}}-{{word}}",
+          "name": "{{word}} {{word}} Device",
+          "description": "{{sentence}}",
+          "category": "Electronics",
+          "unit_price": "{{float}}",
+          "currency": "USD",
+          "weight_kg": "{{float}}",
+          "dimensions": {
+            "length_cm": 22,
+            "width_cm": 14,
+            "height_cm": 8
+          },
+          "barcode": "{{integer}}{{integer}}",
+          "supplier_id": "{{uuid}}",
+          "stock_levels": [],
+          "total_stock": 0,
+          "is_active": true,
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Update Stock Level",
+      "method": "PATCH",
+      "path": "/api/v1/skus/:sku_id/stock/:warehouse_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 150,
+      "response": {
+        "success": true,
+        "message": "Stock level updated successfully.",
+        "data": {
+          "sku_id": "{{uuid}}",
+          "sku": "SKU-{{integer}}-{{word}}",
+          "warehouse_id": "{{uuid}}",
+          "warehouse_name": "{{city}} Distribution Center",
+          "previous_quantity": "{{integer}}",
+          "new_quantity": "{{integer}}",
+          "quantity_reserved": "{{integer}}",
+          "quantity_available": "{{integer}}",
+          "adjustment_type": "receipt",
+          "adjustment_reason": "Purchase order PO-{{integer}} received",
+          "adjusted_by": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          },
+          "bin_location": "A-12-03",
+          "low_stock_alert": false,
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "List Suppliers",
+      "method": "GET",
+      "path": "/api/v1/suppliers",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "meta": {
+          "total": 3,
+          "page": 1,
+          "per_page": 25,
+          "total_pages": 1
+        },
+        "data": [
+          {
+            "id": "{{uuid}}",
+            "name": "{{company}}",
+            "code": "SUP-{{integer}}",
+            "contact": {
+              "primary_name": "{{name}}",
+              "email": "{{email}}",
+              "phone": "{{phone}}",
+              "job_title": "{{jobtitle}}"
+            },
+            "address": {
+              "street": "{{integer}} {{word}} Street",
+              "city": "{{city}}",
+              "zipcode": "{{zipcode}}",
+              "country": "{{country}}"
+            },
+            "payment_terms": "Net 30",
+            "iban": "{{iban}}",
+            "rating": 4.5,
+            "active_skus_count": "{{integer}}",
+            "total_orders": "{{integer}}",
+            "lead_time_days": 14,
+            "is_active": true,
+            "website": "{{url}}",
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{company}}",
+            "code": "SUP-{{integer}}",
+            "contact": {
+              "primary_name": "{{name}}",
+              "email": "{{email}}",
+              "phone": "{{phone}}",
+              "job_title": "{{jobtitle}}"
+            },
+            "address": {
+              "street": "{{integer}} {{word}} Avenue",
+              "city": "{{city}}",
+              "zipcode": "{{zipcode}}",
+              "country": "{{country}}"
+            },
+            "payment_terms": "Net 45",
+            "iban": "{{iban}}",
+            "rating": 3.8,
+            "active_skus_count": "{{integer}}",
+            "total_orders": "{{integer}}",
+            "lead_time_days": 21,
+            "is_active": true,
+            "website": "{{url}}",
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{company}}",
+            "code": "SUP-{{integer}}",
+            "contact": {
+              "primary_name": "{{name}}",
+              "email": "{{email}}",
+              "phone": "{{phone}}",
+              "job_title": "{{jobtitle}}"
+            },
+            "address": {
+              "street": "{{integer}} {{word}} Road",
+              "city": "{{city}}",
+              "zipcode": "{{zipcode}}",
+              "country": "{{country}}"
+            },
+            "payment_terms": "Net 60",
+            "iban": "{{iban}}",
+            "rating": 4.2,
+            "active_skus_count": "{{integer}}",
+            "total_orders": "{{integer}}",
+            "lead_time_days": 7,
+            "is_active": true,
+            "website": "{{url}}",
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Create Purchase Order",
+      "method": "POST",
+      "path": "/api/v1/purchase-orders",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}",
+        "Location": "/api/v1/purchase-orders/{{uuid}}"
+      },
+      "delay_ms": 300,
+      "response": {
+        "success": true,
+        "message": "Purchase order created successfully.",
+        "data": {
+          "id": "{{uuid}}",
+          "po_number": "PO-{{integer}}-{{integer}}",
+          "status": "pending",
+          "supplier": {
+            "id": "{{uuid}}",
+            "name": "{{company}}",
+            "contact_email": "{{email}}"
+          },
+          "destination_warehouse": {
+            "id": "{{uuid}}",
+            "name": "{{city}} Distribution Center",
+            "code": "WH-{{integer}}"
+          },
+          "line_items": [
+            {
+              "line_number": 1,
+              "sku_id": "{{uuid}}",
+              "sku": "SKU-{{integer}}-{{word}}",
+              "product_name": "{{word}} {{word}} Widget",
+              "quantity_ordered": 200,
+              "unit_cost": "{{float}}",
+              "total_cost": "{{float}}",
+              "currency": "USD"
+            },
+            {
+              "line_number": 2,
+              "sku_id": "{{uuid}}",
+              "sku": "SKU-{{integer}}-{{word}}",
+              "product_name": "{{word}} {{word}} Gadget",
+              "quantity_ordered": 100,
+              "unit_cost": "{{float}}",
+              "total_cost": "{{float}}",
+              "currency": "USD"
+            },
+            {
+              "line_number": 3,
+              "sku_id": "{{uuid}}",
+              "sku": "SKU-{{integer}}-{{word}}",
+              "product_name": "{{word}} {{word}} Component",
+              "quantity_ordered": 500,
+              "unit_cost": "{{float}}",
+              "total_cost": "{{float}}",
+              "currency": "USD"
+            }
+          ],
+          "subtotal": "{{float}}",
+          "shipping_cost": "{{float}}",
+          "tax": "{{float}}",
+          "total_amount": "{{float}}",
+          "currency": "USD",
+          "payment_terms": "Net 30",
+          "expected_delivery_date": "{{isodate}}",
+          "notes": "{{sentence}}",
+          "created_by": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          },
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "List Purchase Orders",
+      "method": "GET",
+      "path": "/api/v1/purchase-orders",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "meta": {
+          "total": 3,
+          "page": 1,
+          "per_page": 25,
+          "total_pages": 1
+        },
+        "data": [
+          {
+            "id": "{{uuid}}",
+            "po_number": "PO-{{integer}}-{{integer}}",
+            "status": "pending",
+            "supplier_name": "{{company}}",
+            "destination_warehouse": "{{city}"
+          }
+        ]
+      }
+    }
+  ]
+}
