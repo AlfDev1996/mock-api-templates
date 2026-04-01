@@ -28,7 +28,8 @@
     "category": "analytics",
     "name": "Analytics & Events API",
     "description": "Page views, events, sessions, funnels, conversion rates, UTM tracking",
-    "published": false
+    "published": true,
+    "published_at": "2026-04-01"
   },
   {
     "slug": "geolocation-api",

@@ -1,0 +1,674 @@
+{
+  "name": "Analytics & Events API",
+  "description": "Complete analytics platform API covering page views, events, sessions, funnels, conversion rates, and UTM tracking. Designed for frontend dashboards, reporting tools, and data pipeline testing.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Get Page Views Summary",
+      "method": "GET",
+      "path": "/analytics/pageviews",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-RateLimit-Limit": "1000",
+        "X-RateLimit-Remaining": "{{integer}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "status": "success",
+        "data": {
+          "summary": {
+            "total_pageviews": "{{integer}}",
+            "unique_visitors": "{{integer}}",
+            "avg_time_on_page_seconds": "{{float}}",
+            "bounce_rate": "{{float}}",
+            "period_start": "{{isodate}}",
+            "period_end": "{{isodate}}"
+          },
+          "top_pages": [
+            {
+              "page_id": "{{uuid}}",
+              "url": "{{url}}",
+              "title": "{{sentence}}",
+              "views": "{{integer}}",
+              "unique_views": "{{integer}}",
+              "avg_duration_seconds": "{{float}}",
+              "exit_rate": "{{float}}"
+            },
+            {
+              "page_id": "{{uuid}}",
+              "url": "{{url}}",
+              "title": "{{sentence}}",
+              "views": "{{integer}}",
+              "unique_views": "{{integer}}",
+              "avg_duration_seconds": "{{float}}",
+              "exit_rate": "{{float}}"
+            },
+            {
+              "page_id": "{{uuid}}",
+              "url": "{{url}}",
+              "title": "{{sentence}}",
+              "views": "{{integer}}",
+              "unique_views": "{{integer}}",
+              "avg_duration_seconds": "{{float}}",
+              "exit_rate": "{{float}}"
+            },
+            {
+              "page_id": "{{uuid}}",
+              "url": "{{url}}",
+              "title": "{{sentence}}",
+              "views": "{{integer}}",
+              "unique_views": "{{integer}}",
+              "avg_duration_seconds": "{{float}}",
+              "exit_rate": "{{float}}"
+            },
+            {
+              "page_id": "{{uuid}}",
+              "url": "{{url}}",
+              "title": "{{sentence}}",
+              "views": "{{integer}}",
+              "unique_views": "{{integer}}",
+              "avg_duration_seconds": "{{float}}",
+              "exit_rate": "{{float}}"
+            }
+          ],
+          "traffic_by_source": {
+            "direct": "{{integer}}",
+            "organic_search": "{{integer}}",
+            "paid_search": "{{integer}}",
+            "social": "{{integer}}",
+            "referral": "{{integer}}",
+            "email": "{{integer}}"
+          }
+        },
+        "meta": {
+          "generated_at": "{{isodate}}",
+          "request_id": "{{uuid}}"
+        }
+      }
+    },
+    {
+      "name": "Track Event",
+      "method": "POST",
+      "path": "/analytics/events",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "Location": "/analytics/events/{{uuid}}"
+      },
+      "delay_ms": 120,
+      "response": {
+        "status": "success",
+        "data": {
+          "event_id": "{{uuid}}",
+          "event_name": "{{word}}",
+          "category": "{{word}}",
+          "action": "{{word}}",
+          "label": "{{sentence}}",
+          "value": "{{float}}",
+          "session_id": "{{uuid}}",
+          "visitor_id": "{{uuid}}",
+          "properties": {
+            "page_url": "{{url}}",
+            "referrer": "{{url}}",
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "ip_address": "{{ipv4}}",
+            "country": "{{country}}",
+            "city": "{{city}}",
+            "device_type": "desktop",
+            "browser": "Chrome",
+            "screen_resolution": "1920x1080"
+          },
+          "utm": {
+            "utm_source": "{{word}}",
+            "utm_medium": "{{word}}",
+            "utm_campaign": "{{word}}",
+            "utm_term": "{{word}}",
+            "utm_content": "{{word}}"
+          },
+          "user": {
+            "user_id": "{{uuid}}",
+            "email": "{{email}}",
+            "name": "{{name}}"
+          },
+          "created_at": "{{isodate}}",
+          "processed": "{{boolean}}"
+        },
+        "meta": {
+          "request_id": "{{uuid}}",
+          "ingestion_time_ms": "{{integer}}"
+        }
+      }
+    },
+    {
+      "name": "Get Event by ID",
+      "method": "GET",
+      "path": "/analytics/events/:event_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 0,
+      "response": {
+        "status": "success",
+        "data": {
+          "event_id": "{{uuid}}",
+          "event_name": "{{word}}",
+          "category": "{{word}}",
+          "action": "{{word}}",
+          "label": "{{sentence}}",
+          "value": "{{float}}",
+          "session_id": "{{uuid}}",
+          "visitor_id": "{{uuid}}",
+          "properties": {
+            "page_url": "{{url}}",
+            "referrer": "{{url}}",
+            "ip_address": "{{ipv4}}",
+            "country": "{{country}}",
+            "city": "{{city}}",
+            "device_type": "mobile",
+            "browser": "Safari",
+            "os": "iOS 17.2"
+          },
+          "utm": {
+            "utm_source": "{{word}}",
+            "utm_medium": "{{word}}",
+            "utm_campaign": "{{word}}",
+            "utm_term": null,
+            "utm_content": null
+          },
+          "created_at": "{{isodate}}",
+          "processed": true,
+          "processed_at": "{{isodate}}"
+        },
+        "meta": {
+          "request_id": "{{uuid}}"
+        }
+      }
+    },
+    {
+      "name": "Event Not Found",
+      "method": "GET",
+      "path": "/analytics/events/nonexistent",
+      "status_code": 404,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 0,
+      "response": {
+        "status": "error",
+        "error": {
+          "code": "EVENT_NOT_FOUND",
+          "message": "The requested event could not be found.",
+          "details": "No event exists with the provided identifier. It may have been deleted or the ID is incorrect.",
+          "request_id": "{{uuid}}",
+          "timestamp": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "List Sessions",
+      "method": "GET",
+      "path": "/analytics/sessions",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Total-Count": "{{integer}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "status": "success",
+        "data": {
+          "sessions": [
+            {
+              "session_id": "{{uuid}}",
+              "visitor_id": "{{uuid}}",
+              "started_at": "{{isodate}}",
+              "ended_at": "{{isodate}}",
+              "duration_seconds": "{{integer}}",
+              "pages_viewed": "{{integer}}",
+              "events_count": "{{integer}}",
+              "entry_page": "{{url}}",
+              "exit_page": "{{url}}",
+              "is_bounce": "{{boolean}}",
+              "location": {
+                "country": "{{country}}",
+                "city": "{{city}}",
+                "zipcode": "{{zipcode}}",
+                "ip": "{{ipv4}}"
+              },
+              "device": {
+                "type": "desktop",
+                "browser": "Firefox",
+                "os": "Windows 11"
+              },
+              "referrer": "{{url}}",
+              "utm": {
+                "utm_source": "{{word}}",
+                "utm_medium": "cpc",
+                "utm_campaign": "{{word}}"
+              }
+            },
+            {
+              "session_id": "{{uuid}}",
+              "visitor_id": "{{uuid}}",
+              "started_at": "{{isodate}}",
+              "ended_at": "{{isodate}}",
+              "duration_seconds": "{{integer}}",
+              "pages_viewed": "{{integer}}",
+              "events_count": "{{integer}}",
+              "entry_page": "{{url}}",
+              "exit_page": "{{url}}",
+              "is_bounce": "{{boolean}}",
+              "location": {
+                "country": "{{country}}",
+                "city": "{{city}}",
+                "zipcode": "{{zipcode}}",
+                "ip": "{{ipv4}}"
+              },
+              "device": {
+                "type": "mobile",
+                "browser": "Chrome Mobile",
+                "os": "Android 14"
+              },
+              "referrer": "{{url}}",
+              "utm": {
+                "utm_source": "{{word}}",
+                "utm_medium": "organic",
+                "utm_campaign": null
+              }
+            },
+            {
+              "session_id": "{{uuid}}",
+              "visitor_id": "{{uuid}}",
+              "started_at": "{{isodate}}",
+              "ended_at": null,
+              "duration_seconds": "{{integer}}",
+              "pages_viewed": "{{integer}}",
+              "events_count": "{{integer}}",
+              "entry_page": "{{url}}",
+              "exit_page": null,
+              "is_bounce": false,
+              "location": {
+                "country": "{{country}}",
+                "city": "{{city}}",
+                "zipcode": "{{zipcode}}",
+                "ip": "{{ipv4}}"
+              },
+              "device": {
+                "type": "tablet",
+                "browser": "Safari",
+                "os": "iPadOS 17"
+              },
+              "referrer": null,
+              "utm": null
+            }
+          ],
+          "summary": {
+            "total_sessions": "{{integer}}",
+            "avg_duration_seconds": "{{float}}",
+            "avg_pages_per_session": "{{float}}",
+            "bounce_rate": "{{float}}",
+            "new_visitor_rate": "{{float}}"
+          }
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 25,
+          "total_pages": "{{integer}}",
+          "total_records": "{{integer}}"
+        },
+        "meta": {
+          "request_id": "{{uuid}}",
+          "generated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Get Session Details",
+      "method": "GET",
+      "path": "/analytics/sessions/:session_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 0,
+      "response": {
+        "status": "success",
+        "data": {
+          "session_id": "{{uuid}}",
+          "visitor_id": "{{uuid}}",
+          "user_id": "{{uuid}}",
+          "started_at": "{{isodate}}",
+          "ended_at": "{{isodate}}",
+          "duration_seconds": "{{integer}}",
+          "is_bounce": false,
+          "location": {
+            "country": "{{country}}",
+            "city": "{{city}}",
+            "ip": "{{ipv4}}"
+          },
+          "device": {
+            "type": "desktop",
+            "browser": "Chrome 120",
+            "os": "macOS Sonoma"
+          },
+          "page_trail": [
+            {
+              "page_url": "{{url}}",
+              "title": "{{sentence}}",
+              "entered_at": "{{isodate}}",
+              "time_on_page_seconds": "{{integer}}"
+            },
+            {
+              "page_url": "{{url}}",
+              "title": "{{sentence}}",
+              "entered_at": "{{isodate}}",
+              "time_on_page_seconds": "{{integer}}"
+            },
+            {
+              "page_url": "{{url}}",
+              "title": "{{sentence}}",
+              "entered_at": "{{isodate}}",
+              "time_on_page_seconds": "{{integer}}"
+            }
+          ],
+          "events": [
+            {
+              "event_id": "{{uuid}}",
+              "event_name": "button_click",
+              "category": "engagement",
+              "created_at": "{{isodate}}"
+            },
+            {
+              "event_id": "{{uuid}}",
+              "event_name": "form_submit",
+              "category": "conversion",
+              "created_at": "{{isodate}}"
+            }
+          ],
+          "utm": {
+            "utm_source": "{{word}}",
+            "utm_medium": "{{word}}",
+            "utm_campaign": "{{word}}",
+            "utm_term": "{{word}}",
+            "utm_content": "{{word}}"
+          }
+        },
+        "meta": {
+          "request_id": "{{uuid}}"
+        }
+      }
+    },
+    {
+      "name": "Get Funnel Analysis",
+      "method": "GET",
+      "path": "/analytics/funnels/:funnel_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 0,
+      "response": {
+        "status": "success",
+        "data": {
+          "funnel_id": "{{uuid}}",
+          "funnel_name": "Purchase Funnel",
+          "description": "{{sentence}}",
+          "created_by": "{{email}}",
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}",
+          "period": {
+            "start": "{{isodate}}",
+            "end": "{{isodate}}"
+          },
+          "overall_conversion_rate": "{{float}}",
+          "total_entered": "{{integer}}",
+          "total_completed": "{{integer}}",
+          "steps": [
+            {
+              "step_number": 1,
+              "name": "Landing Page Visit",
+              "event_name": "page_view",
+              "visitors": "{{integer}}",
+              "conversion_rate_to_next": "{{float}}",
+              "dropoff_rate": "{{float}}",
+              "avg_time_to_next_seconds": "{{integer}}"
+            },
+            {
+              "step_number": 2,
+              "name": "Product View",
+              "event_name": "product_viewed",
+              "visitors": "{{integer}}",
+              "conversion_rate_to_next": "{{float}}",
+              "dropoff_rate": "{{float}}",
+              "avg_time_to_next_seconds": "{{integer}}"
+            },
+            {
+              "step_number": 3,
+              "name": "Add to Cart",
+              "event_name": "add_to_cart",
+              "visitors": "{{integer}}",
+              "conversion_rate_to_next": "{{float}}",
+              "dropoff_rate": "{{float}}",
+              "avg_time_to_next_seconds": "{{integer}}"
+            },
+            {
+              "step_number": 4,
+              "name": "Checkout Started",
+              "event_name": "checkout_initiated",
+              "visitors": "{{integer}}",
+              "conversion_rate_to_next": "{{float}}",
+              "dropoff_rate": "{{float}}",
+              "avg_time_to_next_seconds": "{{integer}}"
+            },
+            {
+              "step_number": 5,
+              "name": "Purchase Complete",
+              "event_name": "purchase_completed",
+              "visitors": "{{integer}}",
+              "conversion_rate_to_next": null,
+              "dropoff_rate": null,
+              "avg_time_to_next_seconds": null
+            }
+          ],
+          "segmentation": {
+            "by_device": {
+              "desktop": {
+                "entered": "{{integer}}",
+                "completed": "{{integer}}",
+                "conversion_rate": "{{float}}"
+              },
+              "mobile": {
+                "entered": "{{integer}}",
+                "completed": "{{integer}}",
+                "conversion_rate": "{{float}}"
+              },
+              "tablet": {
+                "entered": "{{integer}}",
+                "completed": "{{integer}}",
+                "conversion_rate": "{{float}}"
+              }
+            },
+            "by_source": {
+              "organic": {
+                "entered": "{{integer}}",
+                "completed": "{{integer}}",
+                "conversion_rate": "{{float}}"
+              },
+              "paid": {
+                "entered": "{{integer}}",
+                "completed": "{{integer}}",
+                "conversion_rate": "{{float}}"
+              },
+              "direct": {
+                "entered": "{{integer}}",
+                "completed": "{{integer}}",
+                "conversion_rate": "{{float}}"
+              }
+            }
+          }
+        },
+        "meta": {
+          "request_id": "{{uuid}}",
+          "generated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Create Funnel",
+      "method": "POST",
+      "path": "/analytics/funnels",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "Location": "/analytics/funnels/{{uuid}}"
+      },
+      "delay_ms": 200,
+      "response": {
+        "status": "success",
+        "data": {
+          "funnel_id": "{{uuid}}",
+          "funnel_name": "{{word}} Conversion Funnel",
+          "description": "{{sentence}}",
+          "created_by": "{{email}}",
+          "created_at": "{{isodate}}",
+          "steps": [
+            {
+              "step_number": 1,
+              "name": "{{word}}",
+              "event_name": "{{word}}"
+            },
+            {
+              "step_number": 2,
+              "name": "{{word}}",
+              "event_name": "{{word}}"
+            },
+            {
+              "step_number": 3,
+              "name": "{{word}}",
+              "event_name": "{{word}}"
+            }
+          ],
+          "is_active": true
+        },
+        "meta": {
+          "request_id": "{{uuid}}"
+        }
+      }
+    },
+    {
+      "name": "Get Conversion Rates",
+      "method": "GET",
+      "path": "/analytics/conversions",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "delay_ms": 0,
+      "response": {
+        "status": "success",
+        "data": {
+          "period": {
+            "start": "{{isodate}}",
+            "end": "{{isodate}}",
+            "granularity": "daily"
+          },
+          "overall": {
+            "total_visitors": "{{integer}}",
+            "total_conversions": "{{integer}}",
+            "conversion_rate": "{{float}}",
+            "revenue": "{{float}}",
+            "avg_order_value": "{{float}}"
+          },
+          "goals": [
+            {
+              "goal_id": "{{uuid}}",
+              "goal_name": "Newsletter Signup",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}",
+              "value_per_conversion": "{{float}}"
+            },
+            {
+              "goal_id": "{{uuid}}",
+              "goal_name": "Free Trial Start",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}",
+              "value_per_conversion": "{{float}}"
+            },
+            {
+              "goal_id": "{{uuid}}",
+              "goal_name": "Purchase Completed",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}",
+              "value_per_conversion": "{{float}}"
+            },
+            {
+              "goal_id": "{{uuid}}",
+              "goal_name": "Contact Form Submission",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}",
+              "value_per_conversion": "{{float}}"
+            }
+          ],
+          "by_channel": [
+            {
+              "channel": "organic_search",
+              "visitors": "{{integer}}",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}",
+              "revenue": "{{float}}"
+            },
+            {
+              "channel": "paid_search",
+              "visitors": "{{integer}}",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}",
+              "revenue": "{{float}}"
+            },
+            {
+              "channel": "social",
+              "visitors": "{{integer}}",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}",
+              "revenue": "{{float}}"
+            },
+            {
+              "channel": "email",
+              "visitors": "{{integer}}",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}",
+              "revenue": "{{float}}"
+            },
+            {
+              "channel": "direct",
+              "visitors": "{{integer}}",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}",
+              "revenue": "{{float}}"
+            }
+          ],
+          "trend": [
+            {
+              "date": "{{isodate}}",
+              "visitors": "{{integer}}",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}"
+            },
+            {
+              "date": "{{isodate}}",
+              "visitors": "{{integer}}",
+              "conversions": "{{integer}}",
+              "conversion_rate": "{{float}}"
+            },
+            {
+              "date": "{{isodate}}",
+              "visitors": "{{integer}}",
+              "conversions": "{{integer}"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
