@@ -1,0 +1,919 @@
+{
+  "name": "Geolocation & Maps API",
+  "description": "Full-featured geolocation API supporting geocoding, reverse geocoding, distance matrix calculations, points of interest discovery, and route planning between waypoints.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Geocode Address",
+      "method": "GET",
+      "path": "/location/geocode",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}",
+        "X-RateLimit-Remaining": "{{integer}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "status": "OK",
+        "query": "123 Main Street, Springfield",
+        "results": [
+          {
+            "place_id": "{{uuid}}",
+            "formatted_address": "123 Main Street, {{city}}, {{zipcode}}, {{country}}",
+            "geometry": {
+              "location": {
+                "lat": {
+                  "lng": [
+                    [
+                      "float}}\n              }",
+                      {
+                        "location_type": "ROOFTOP",
+                        "viewport": {
+                          "northeast": {
+                            "lat": {
+                              "lng": [
+                                [
+                                  "float}}\n                }",
+                                  {
+                                    "southwest": {
+                                      "lat": {
+                                        "lng": [
+                                          [
+                                            "float}}\n                }\n              }\n            }",
+                                            {
+                                              "address_components": [
+                                                {
+                                                  "long_name": "123",
+                                                  "short_name": "123",
+                                                  "types": [
+                                                    "street_number"
+                                                  ]
+                                                },
+                                                {
+                                                  "long_name": "Main Street",
+                                                  "short_name": "Main St",
+                                                  "types": [
+                                                    "route"
+                                                  ]
+                                                },
+                                                {
+                                                  "long_name": "{{city}}",
+                                                  "short_name": "{{city}}",
+                                                  "types": [
+                                                    "locality",
+                                                    "political"
+                                                  ]
+                                                },
+                                                {
+                                                  "long_name": "{{country}}",
+                                                  "short_name": "{{country}}",
+                                                  "types": [
+                                                    "country",
+                                                    "political"
+                                                  ]
+                                                },
+                                                {
+                                                  "long_name": "{{zipcode}}",
+                                                  "short_name": "{{zipcode}}",
+                                                  "types": [
+                                                    "postal_code"
+                                                  ]
+                                                }
+                                              ],
+                                              "confidence": 0.97,
+                                              "place_type": "address"
+                                            }
+                                          ],
+                                          {
+                                            "attribution": "© MockHub Geolocation Services",
+                                            "timestamp": "{{isodate}}"
+                                          }
+                                        ],
+                                        "name": "Reverse Geocode Coordinates",
+                                        "method": "GET",
+                                        "path": "/location/reverse-geocode",
+                                        "status_code": 200,
+                                        "headers": {
+                                          "Content-Type": "application/json",
+                                          "X-Request-Id": "{{uuid}}",
+                                          "X-RateLimit-Remaining": "{{integer}}"
+                                        },
+                                        "delay_ms": 0,
+                                        "response": {
+                                          "status": "OK",
+                                          "query": {
+                                            "lat": {
+                                              "lng": [
+                                                [
+                                                  "float}}\n        }",
+                                                  {
+                                                    "results": [
+                                                      {
+                                                        "place_id": "{{uuid}}",
+                                                        "formatted_address": "{{integer}} {{word}} Avenue, {{city}}, {{zipcode}}, {{country}}",
+                                                        "address_components": [
+                                                          {
+                                                            "long_name": "{{integer}}",
+                                                            "short_name": "{{integer}}",
+                                                            "types": [
+                                                              "street_number"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "long_name": "{{word}} Avenue",
+                                                            "short_name": "{{word}} Ave",
+                                                            "types": [
+                                                              "route"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "long_name": "{{city}}",
+                                                            "short_name": "{{city}}",
+                                                            "types": [
+                                                              "locality",
+                                                              "political"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "long_name": "{{country}}",
+                                                            "short_name": "{{country}}",
+                                                            "types": [
+                                                              "country",
+                                                              "political"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "long_name": "{{zipcode}}",
+                                                            "short_name": "{{zipcode}}",
+                                                            "types": [
+                                                              "postal_code"
+                                                            ]
+                                                          }
+                                                        ],
+                                                        "geometry": {
+                                                          "location": {
+                                                            "lat": {
+                                                              "lng": [
+                                                                [
+                                                                  "float}}\n              }",
+                                                                  {
+                                                                    "location_type": "APPROXIMATE"
+                                                                  },
+                                                                  {
+                                                                    "confidence": 0.89,
+                                                                    "place_type": "street_address"
+                                                                  },
+                                                                  {
+                                                                    "place_id": "{{uuid}}",
+                                                                    "formatted_address": "{{city}}, {{country}}",
+                                                                    "address_components": [
+                                                                      {
+                                                                        "long_name": "{{city}}",
+                                                                        "short_name": "{{city}}",
+                                                                        "types": [
+                                                                          "locality",
+                                                                          "political"
+                                                                        ]
+                                                                      },
+                                                                      {
+                                                                        "long_name": "{{country}}",
+                                                                        "short_name": "{{country}}",
+                                                                        "types": [
+                                                                          "country",
+                                                                          "political"
+                                                                        ]
+                                                                      }
+                                                                    ],
+                                                                    "geometry": {
+                                                                      "location": {
+                                                                        "lat": {
+                                                                          "lng": [
+                                                                            [
+                                                                              "float}}\n              }",
+                                                                              {
+                                                                                "location_type": "APPROXIMATE"
+                                                                              },
+                                                                              {
+                                                                                "confidence": 0.72,
+                                                                                "place_type": "locality"
+                                                                              }
+                                                                            ],
+                                                                            {
+                                                                              "attribution": "© MockHub Geolocation Services",
+                                                                              "timestamp": "{{isodate}}"
+                                                                            }
+                                                                          ],
+                                                                          "name": "Calculate Distance Matrix",
+                                                                          "method": "POST",
+                                                                          "path": "/location/distance-matrix",
+                                                                          "status_code": 200,
+                                                                          "headers": {
+                                                                            "Content-Type": "application/json",
+                                                                            "X-Request-Id": "{{uuid}}",
+                                                                            "X-RateLimit-Remaining": "{{integer}}"
+                                                                          },
+                                                                          "delay_ms": 180,
+                                                                          "response": {
+                                                                            "status": "OK",
+                                                                            "origin_addresses": [
+                                                                              "{{integer}} {{word}} Street, {{city}}, {{country}}",
+                                                                              "{{integer}} {{word}} Boulevard, {{city}}, {{country}}"
+                                                                            ],
+                                                                            "destination_addresses": [
+                                                                              "{{integer}} {{word}} Road, {{city}}, {{country}}",
+                                                                              "{{integer}} {{word}} Lane, {{city}}, {{country}}",
+                                                                              "{{integer}} {{word}} Plaza, {{city}}, {{country}}"
+                                                                            ],
+                                                                            "rows": [
+                                                                              {
+                                                                                "elements": [
+                                                                                  {
+                                                                                    "status": "OK",
+                                                                                    "distance": {
+                                                                                      "text": "12.4 km",
+                                                                                      "value": 12400
+                                                                                    },
+                                                                                    "duration": {
+                                                                                      "text": "18 mins",
+                                                                                      "value": 1080
+                                                                                    },
+                                                                                    "duration_in_traffic": {
+                                                                                      "text": "23 mins",
+                                                                                      "value": 1380
+                                                                                    }
+                                                                                  },
+                                                                                  {
+                                                                                    "status": "OK",
+                                                                                    "distance": {
+                                                                                      "text": "34.7 km",
+                                                                                      "value": 34700
+                                                                                    },
+                                                                                    "duration": {
+                                                                                      "text": "42 mins",
+                                                                                      "value": 2520
+                                                                                    },
+                                                                                    "duration_in_traffic": {
+                                                                                      "text": "55 mins",
+                                                                                      "value": 3300
+                                                                                    }
+                                                                                  },
+                                                                                  {
+                                                                                    "status": "OK",
+                                                                                    "distance": {
+                                                                                      "text": "8.1 km",
+                                                                                      "value": 8100
+                                                                                    },
+                                                                                    "duration": {
+                                                                                      "text": "11 mins",
+                                                                                      "value": 660
+                                                                                    },
+                                                                                    "duration_in_traffic": {
+                                                                                      "text": "14 mins",
+                                                                                      "value": 840
+                                                                                    }
+                                                                                  }
+                                                                                ]
+                                                                              },
+                                                                              {
+                                                                                "elements": [
+                                                                                  {
+                                                                                    "status": "OK",
+                                                                                    "distance": {
+                                                                                      "text": "21.9 km",
+                                                                                      "value": 21900
+                                                                                    },
+                                                                                    "duration": {
+                                                                                      "text": "27 mins",
+                                                                                      "value": 1620
+                                                                                    },
+                                                                                    "duration_in_traffic": {
+                                                                                      "text": "35 mins",
+                                                                                      "value": 2100
+                                                                                    }
+                                                                                  },
+                                                                                  {
+                                                                                    "status": "OK",
+                                                                                    "distance": {
+                                                                                      "text": "5.3 km",
+                                                                                      "value": 5300
+                                                                                    },
+                                                                                    "duration": {
+                                                                                      "text": "8 mins",
+                                                                                      "value": 480
+                                                                                    },
+                                                                                    "duration_in_traffic": {
+                                                                                      "text": "10 mins",
+                                                                                      "value": 600
+                                                                                    }
+                                                                                  },
+                                                                                  {
+                                                                                    "status": "OK",
+                                                                                    "distance": {
+                                                                                      "text": "45.6 km",
+                                                                                      "value": 45600
+                                                                                    },
+                                                                                    "duration": {
+                                                                                      "text": "52 mins",
+                                                                                      "value": 3120
+                                                                                    },
+                                                                                    "duration_in_traffic": {
+                                                                                      "text": "1 hr 8 mins",
+                                                                                      "value": 4080
+                                                                                    }
+                                                                                  }
+                                                                                ]
+                                                                              }
+                                                                            ],
+                                                                            "units": "metric",
+                                                                            "mode": "driving",
+                                                                            "timestamp": "{{isodate}}"
+                                                                          }
+                                                                        },
+                                                                        "name": "Search Points of Interest",
+                                                                        "method": "GET",
+                                                                        "path": "/location/poi/search",
+                                                                        "status_code": 200,
+                                                                        "headers": {
+                                                                          "Content-Type": "application/json",
+                                                                          "X-Request-Id": "{{uuid}}",
+                                                                          "X-RateLimit-Remaining": "{{integer}}"
+                                                                        },
+                                                                        "delay_ms": 0,
+                                                                        "response": {
+                                                                          "status": "OK",
+                                                                          "query": {
+                                                                            "keyword": "restaurant",
+                                                                            "radius_meters": 2000,
+                                                                            "center": {
+                                                                              "lat": {
+                                                                                "lng": [
+                                                                                  [
+                                                                                    "float}}\n          }\n        }",
+                                                                                    {
+                                                                                      "total_results": 4,
+                                                                                      "results": [
+                                                                                        {
+                                                                                          "poi_id": "{{uuid}}",
+                                                                                          "name": "{{company}} Bistro",
+                                                                                          "category": "restaurant",
+                                                                                          "subcategory": "fine_dining",
+                                                                                          "location": {
+                                                                                            "lat": {
+                                                                                              "lng": {
+                                                                                                "formatted_address": "{{integer}} {{word}} Street, {{city}}, {{zipcode}}, {{country}}"
+                                                                                              },
+                                                                                              "contact": {
+                                                                                                "phone": "{{phone}}",
+                                                                                                "email": "{{email}}",
+                                                                                                "website": "{{url}}"
+                                                                                              },
+                                                                                              "rating": {
+                                                                                                "average": 4.6,
+                                                                                                "total_reviews": {
+                                                                                                  "breakdown": {
+                                                                                                    "five_star": {
+                                                                                                      "four_star": {
+                                                                                                        "three_star": {
+                                                                                                          "two_star": {
+                                                                                                            "one_star": [
+                                                                                                              [
+                                                                                                                "integer}}\n              }\n            }",
+                                                                                                                {
+                                                                                                                  "opening_hours": {
+                                                                                                                    "monday": "11:00-22:00",
+                                                                                                                    "tuesday": "11:00-22:00",
+                                                                                                                    "wednesday": "11:00-22:00",
+                                                                                                                    "thursday": "11:00-23:00",
+                                                                                                                    "friday": "11:00-23:30",
+                                                                                                                    "saturday": "10:00-23:30",
+                                                                                                                    "sunday": "10:00-21:00"
+                                                                                                                  },
+                                                                                                                  "is_open_now": true,
+                                                                                                                  "price_level": 3,
+                                                                                                                  "distance_meters": 340,
+                                                                                                                  "photos": [
+                                                                                                                    {
+                                                                                                                      "photo_id": "{{uuid}}",
+                                                                                                                      "url": "{{url}}",
+                                                                                                                      "width": 1200,
+                                                                                                                      "height": 800
+                                                                                                                    }
+                                                                                                                  ]
+                                                                                                                },
+                                                                                                                {
+                                                                                                                  "poi_id": "{{uuid}}",
+                                                                                                                  "name": "The {{word}} Kitchen",
+                                                                                                                  "category": "restaurant",
+                                                                                                                  "subcategory": "casual_dining",
+                                                                                                                  "location": {
+                                                                                                                    "lat": {
+                                                                                                                      "lng": {
+                                                                                                                        "formatted_address": "{{integer}} {{word}} Road, {{city}}, {{zipcode}}, {{country}}"
+                                                                                                                      },
+                                                                                                                      "contact": {
+                                                                                                                        "phone": "{{phone}}",
+                                                                                                                        "email": "{{email}}",
+                                                                                                                        "website": "{{url}}"
+                                                                                                                      },
+                                                                                                                      "rating": {
+                                                                                                                        "average": 4.2,
+                                                                                                                        "total_reviews": {
+                                                                                                                          "breakdown": {
+                                                                                                                            "five_star": {
+                                                                                                                              "four_star": {
+                                                                                                                                "three_star": {
+                                                                                                                                  "two_star": {
+                                                                                                                                    "one_star": [
+                                                                                                                                      [
+                                                                                                                                        "integer}}\n              }\n            }",
+                                                                                                                                        {
+                                                                                                                                          "opening_hours": {
+                                                                                                                                            "monday": "08:00-21:00",
+                                                                                                                                            "tuesday": "08:00-21:00",
+                                                                                                                                            "wednesday": "08:00-21:00",
+                                                                                                                                            "thursday": "08:00-21:00",
+                                                                                                                                            "friday": "08:00-22:00",
+                                                                                                                                            "saturday": "09:00-22:00",
+                                                                                                                                            "sunday": "09:00-20:00"
+                                                                                                                                          },
+                                                                                                                                          "is_open_now": true,
+                                                                                                                                          "price_level": 2,
+                                                                                                                                          "distance_meters": 780,
+                                                                                                                                          "photos": [
+                                                                                                                                            {
+                                                                                                                                              "photo_id": "{{uuid}}",
+                                                                                                                                              "url": "{{url}}",
+                                                                                                                                              "width": 1024,
+                                                                                                                                              "height": 768
+                                                                                                                                            }
+                                                                                                                                          ]
+                                                                                                                                        },
+                                                                                                                                        {
+                                                                                                                                          "poi_id": "{{uuid}}",
+                                                                                                                                          "name": "{{company}} Grill House",
+                                                                                                                                          "category": "restaurant",
+                                                                                                                                          "subcategory": "steakhouse",
+                                                                                                                                          "location": {
+                                                                                                                                            "lat": {
+                                                                                                                                              "lng": {
+                                                                                                                                                "formatted_address": "{{integer}} {{word}} Avenue, {{city}}, {{zipcode}}, {{country}}"
+                                                                                                                                              },
+                                                                                                                                              "contact": {
+                                                                                                                                                "phone": "{{phone}}",
+                                                                                                                                                "email": "{{email}}",
+                                                                                                                                                "website": "{{url}}"
+                                                                                                                                              },
+                                                                                                                                              "rating": {
+                                                                                                                                                "average": 4.8,
+                                                                                                                                                "total_reviews": {
+                                                                                                                                                  "breakdown": {
+                                                                                                                                                    "five_star": {
+                                                                                                                                                      "four_star": {
+                                                                                                                                                        "three_star": {
+                                                                                                                                                          "two_star": {
+                                                                                                                                                            "one_star": [
+                                                                                                                                                              [
+                                                                                                                                                                "integer}}\n              }\n            }",
+                                                                                                                                                                {
+                                                                                                                                                                  "opening_hours": {
+                                                                                                                                                                    "monday": "12:00-23:00",
+                                                                                                                                                                    "tuesday": "12:00-23:00",
+                                                                                                                                                                    "wednesday": "12:00-23:00",
+                                                                                                                                                                    "thursday": "12:00-23:00",
+                                                                                                                                                                    "friday": "12:00-00:00",
+                                                                                                                                                                    "saturday": "11:00-00:00",
+                                                                                                                                                                    "sunday": "closed"
+                                                                                                                                                                  },
+                                                                                                                                                                  "is_open_now": false,
+                                                                                                                                                                  "price_level": 4,
+                                                                                                                                                                  "distance_meters": 1250,
+                                                                                                                                                                  "photos": [
+                                                                                                                                                                    {
+                                                                                                                                                                      "photo_id": "{{uuid}}",
+                                                                                                                                                                      "url": "{{url}}",
+                                                                                                                                                                      "width": 1600,
+                                                                                                                                                                      "height": 1067
+                                                                                                                                                                    }
+                                                                                                                                                                  ]
+                                                                                                                                                                },
+                                                                                                                                                                {
+                                                                                                                                                                  "poi_id": "{{uuid}}",
+                                                                                                                                                                  "name": "{{firstname}}'s Noodle Bar",
+                                                                                                                                                                  "category": "restaurant",
+                                                                                                                                                                  "subcategory": "asian",
+                                                                                                                                                                  "location": {
+                                                                                                                                                                    "lat": {
+                                                                                                                                                                      "lng": {
+                                                                                                                                                                        "formatted_address": "{{integer}} {{word}} Lane, {{city}}, {{zipcode}}, {{country}}"
+                                                                                                                                                                      },
+                                                                                                                                                                      "contact": {
+                                                                                                                                                                        "phone": "{{phone}}",
+                                                                                                                                                                        "email": "{{email}}",
+                                                                                                                                                                        "website": "{{url}}"
+                                                                                                                                                                      },
+                                                                                                                                                                      "rating": {
+                                                                                                                                                                        "average": 3.9,
+                                                                                                                                                                        "total_reviews": {
+                                                                                                                                                                          "breakdown": {
+                                                                                                                                                                            "five_star": {
+                                                                                                                                                                              "four_star": {
+                                                                                                                                                                                "three_star": {
+                                                                                                                                                                                  "two_star": {
+                                                                                                                                                                                    "one_star": [
+                                                                                                                                                                                      [
+                                                                                                                                                                                        "integer}}\n              }\n            }",
+                                                                                                                                                                                        {
+                                                                                                                                                                                          "opening_hours": {
+                                                                                                                                                                                            "monday": "10:00-20:00",
+                                                                                                                                                                                            "tuesday": "10:00-20:00",
+                                                                                                                                                                                            "wednesday": "10:00-20:00",
+                                                                                                                                                                                            "thursday": "10:00-20:00",
+                                                                                                                                                                                            "friday": "10:00-21:00",
+                                                                                                                                                                                            "saturday": "10:00-21:00",
+                                                                                                                                                                                            "sunday": "11:00-18:00"
+                                                                                                                                                                                          },
+                                                                                                                                                                                          "is_open_now": true,
+                                                                                                                                                                                          "price_level": 1,
+                                                                                                                                                                                          "distance_meters": 1890,
+                                                                                                                                                                                          "photos": [
+                                                                                                                                                                                            {
+                                                                                                                                                                                              "photo_id": "{{uuid}}",
+                                                                                                                                                                                              "url": "{{url}}",
+                                                                                                                                                                                              "width": 800,
+                                                                                                                                                                                              "height": 600
+                                                                                                                                                                                            }
+                                                                                                                                                                                          ]
+                                                                                                                                                                                        }
+                                                                                                                                                                                      ],
+                                                                                                                                                                                      {
+                                                                                                                                                                                        "next_page_token": "{{uuid}}",
+                                                                                                                                                                                        "timestamp": "{{isodate}}"
+                                                                                                                                                                                      }
+                                                                                                                                                                                    ],
+                                                                                                                                                                                    "name": "Get POI Details",
+                                                                                                                                                                                    "method": "GET",
+                                                                                                                                                                                    "path": "/location/poi/:poi_id",
+                                                                                                                                                                                    "status_code": 200,
+                                                                                                                                                                                    "headers": {
+                                                                                                                                                                                      "Content-Type": "application/json",
+                                                                                                                                                                                      "X-Request-Id": "{{uuid}}"
+                                                                                                                                                                                    },
+                                                                                                                                                                                    "delay_ms": 0,
+                                                                                                                                                                                    "response": {
+                                                                                                                                                                                      "status": "OK",
+                                                                                                                                                                                      "poi": {
+                                                                                                                                                                                        "poi_id": "{{uuid}}",
+                                                                                                                                                                                        "name": "{{company}} Grand Restaurant",
+                                                                                                                                                                                        "category": "restaurant",
+                                                                                                                                                                                        "subcategory": "fine_dining",
+                                                                                                                                                                                        "description": "{{sentence}}",
+                                                                                                                                                                                        "location": {
+                                                                                                                                                                                          "lat": {
+                                                                                                                                                                                            "lng": {
+                                                                                                                                                                                              "formatted_address": "{{integer}} {{word}} Boulevard, {{city}}, {{zipcode}}, {{country}}"
+                                                                                                                                                                                            },
+                                                                                                                                                                                            "contact": {
+                                                                                                                                                                                              "phone": "{{phone}}",
+                                                                                                                                                                                              "email": "{{email}}",
+                                                                                                                                                                                              "website": "{{url}}"
+                                                                                                                                                                                            },
+                                                                                                                                                                                            "rating": {
+                                                                                                                                                                                              "average": 4.7,
+                                                                                                                                                                                              "total_reviews": [
+                                                                                                                                                                                                [
+                                                                                                                                                                                                  "integer}}\n          }",
+                                                                                                                                                                                                  {
+                                                                                                                                                                                                    "opening_hours": {
+                                                                                                                                                                                                      "monday": "11:00-23:00",
+                                                                                                                                                                                                      "tuesday": "11:00-23:00",
+                                                                                                                                                                                                      "wednesday": "11:00-23:00",
+                                                                                                                                                                                                      "thursday": "11:00-23:00",
+                                                                                                                                                                                                      "friday": "11:00-00:00",
+                                                                                                                                                                                                      "saturday": "10:00-00:00",
+                                                                                                                                                                                                      "sunday": "10:00-22:00"
+                                                                                                                                                                                                    },
+                                                                                                                                                                                                    "is_open_now": true,
+                                                                                                                                                                                                    "price_level": 4,
+                                                                                                                                                                                                    "amenities": [
+                                                                                                                                                                                                      "wifi",
+                                                                                                                                                                                                      "outdoor_seating",
+                                                                                                                                                                                                      "parking",
+                                                                                                                                                                                                      "wheelchair_accessible",
+                                                                                                                                                                                                      "reservations"
+                                                                                                                                                                                                    ],
+                                                                                                                                                                                                    "reviews": [
+                                                                                                                                                                                                      {
+                                                                                                                                                                                                        "review_id": "{{uuid}}",
+                                                                                                                                                                                                        "author": "{{name}}",
+                                                                                                                                                                                                        "rating": 5,
+                                                                                                                                                                                                        "text": "{{sentence}}",
+                                                                                                                                                                                                        "created_at": "{{isodate}}"
+                                                                                                                                                                                                      },
+                                                                                                                                                                                                      {
+                                                                                                                                                                                                        "review_id": "{{uuid}}",
+                                                                                                                                                                                                        "author": "{{name}}",
+                                                                                                                                                                                                        "rating": 4,
+                                                                                                                                                                                                        "text": "{{sentence}}",
+                                                                                                                                                                                                        "created_at": "{{isodate}}"
+                                                                                                                                                                                                      }
+                                                                                                                                                                                                    ],
+                                                                                                                                                                                                    "photos": [
+                                                                                                                                                                                                      {
+                                                                                                                                                                                                        "photo_id": "{{uuid}}",
+                                                                                                                                                                                                        "url": "{{url}}",
+                                                                                                                                                                                                        "width": 1920,
+                                                                                                                                                                                                        "height": 1280,
+                                                                                                                                                                                                        "caption": "Interior view"
+                                                                                                                                                                                                      },
+                                                                                                                                                                                                      {
+                                                                                                                                                                                                        "photo_id": "{{uuid}}",
+                                                                                                                                                                                                        "url": "{{url}}",
+                                                                                                                                                                                                        "width": 1200,
+                                                                                                                                                                                                        "height": 800,
+                                                                                                                                                                                                        "caption": "Signature dish"
+                                                                                                                                                                                                      }
+                                                                                                                                                                                                    ],
+                                                                                                                                                                                                    "created_at": "{{isodate}}",
+                                                                                                                                                                                                    "updated_at": "{{isodate}}"
+                                                                                                                                                                                                  },
+                                                                                                                                                                                                  {
+                                                                                                                                                                                                    "timestamp": "{{isodate}}"
+                                                                                                                                                                                                  }
+                                                                                                                                                                                                ],
+                                                                                                                                                                                                {
+                                                                                                                                                                                                  "name": "Calculate Route",
+                                                                                                                                                                                                  "method": "POST",
+                                                                                                                                                                                                  "path": "/location/routes",
+                                                                                                                                                                                                  "status_code": 200,
+                                                                                                                                                                                                  "headers": {
+                                                                                                                                                                                                    "Content-Type": "application/json",
+                                                                                                                                                                                                    "X-Request-Id": "{{uuid}}",
+                                                                                                                                                                                                    "X-RateLimit-Remaining": "{{integer}}"
+                                                                                                                                                                                                  },
+                                                                                                                                                                                                  "delay_ms": 250,
+                                                                                                                                                                                                  "response": {
+                                                                                                                                                                                                    "status": "OK",
+                                                                                                                                                                                                    "route_id": "{{uuid}}",
+                                                                                                                                                                                                    "summary": "via {{word}} Highway and {{word}} Expressway",
+                                                                                                                                                                                                    "origin": {
+                                                                                                                                                                                                      "lat": {
+                                                                                                                                                                                                        "lng": {
+                                                                                                                                                                                                          "formatted_address": "{{integer}} {{word}} Street, {{city}}, {{country}}"
+                                                                                                                                                                                                        },
+                                                                                                                                                                                                        "destination": {
+                                                                                                                                                                                                          "lat": {
+                                                                                                                                                                                                            "lng": {
+                                                                                                                                                                                                              "formatted_address": "{{integer}} {{word}} Road, {{city}}, {{country}}"
+                                                                                                                                                                                                            },
+                                                                                                                                                                                                            "total_distance": {
+                                                                                                                                                                                                              "text": "127.3 km",
+                                                                                                                                                                                                              "value": 127300
+                                                                                                                                                                                                            },
+                                                                                                                                                                                                            "total_duration": {
+                                                                                                                                                                                                              "text": "1 hr 42 mins",
+                                                                                                                                                                                                              "value": 6120
+                                                                                                                                                                                                            },
+                                                                                                                                                                                                            "total_duration_in_traffic": {
+                                                                                                                                                                                                              "text": "2 hr 5 mins",
+                                                                                                                                                                                                              "value": 7500
+                                                                                                                                                                                                            },
+                                                                                                                                                                                                            "mode": "driving",
+                                                                                                                                                                                                            "legs": [
+                                                                                                                                                                                                              {
+                                                                                                                                                                                                                "leg_index": 0,
+                                                                                                                                                                                                                "start_location": {
+                                                                                                                                                                                                                  "lat": {
+                                                                                                                                                                                                                    "lng": [
+                                                                                                                                                                                                                      [
+                                                                                                                                                                                                                        "float}}\n            }",
+                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                          "end_location": {
+                                                                                                                                                                                                                            "lat": {
+                                                                                                                                                                                                                              "lng": [
+                                                                                                                                                                                                                                [
+                                                                                                                                                                                                                                  "float}}\n            }",
+                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                    "distance": {
+                                                                                                                                                                                                                                      "text": "127.3 km",
+                                                                                                                                                                                                                                      "value": 127300
+                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                    "duration": {
+                                                                                                                                                                                                                                      "text": "1 hr 42 mins",
+                                                                                                                                                                                                                                      "value": 6120
+                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                    "steps": [
+                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                        "step_index": 0,
+                                                                                                                                                                                                                                        "instruction": "Head north on {{word}} Street toward {{word}} Avenue",
+                                                                                                                                                                                                                                        "distance": {
+                                                                                                                                                                                                                                          "text": "0.4 km",
+                                                                                                                                                                                                                                          "value": 400
+                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                        "duration": {
+                                                                                                                                                                                                                                          "text": "2 mins",
+                                                                                                                                                                                                                                          "value": 120
+                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                        "maneuver": "straight",
+                                                                                                                                                                                                                                        "start_location": {
+                                                                                                                                                                                                                                          "lat": {
+                                                                                                                                                                                                                                            "lng": [
+                                                                                                                                                                                                                                              [
+                                                                                                                                                                                                                                                "float}}\n                }",
+                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                  "end_location": {
+                                                                                                                                                                                                                                                    "lat": {
+                                                                                                                                                                                                                                                      "lng": [
+                                                                                                                                                                                                                                                        [
+                                                                                                                                                                                                                                                          "float}}\n                }\n              }",
+                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                            "step_index": 1,
+                                                                                                                                                                                                                                                            "instruction": "Turn right onto {{word}} Highway",
+                                                                                                                                                                                                                                                            "distance": {
+                                                                                                                                                                                                                                                              "text": "45.2 km",
+                                                                                                                                                                                                                                                              "value": 45200
+                                                                                                                                                                                                                                                            },
+                                                                                                                                                                                                                                                            "duration": {
+                                                                                                                                                                                                                                                              "text": "32 mins",
+                                                                                                                                                                                                                                                              "value": 1920
+                                                                                                                                                                                                                                                            },
+                                                                                                                                                                                                                                                            "maneuver": "turn-right",
+                                                                                                                                                                                                                                                            "start_location": {
+                                                                                                                                                                                                                                                              "lat": {
+                                                                                                                                                                                                                                                                "lng": [
+                                                                                                                                                                                                                                                                  [
+                                                                                                                                                                                                                                                                    "float}}\n                }",
+                                                                                                                                                                                                                                                                    {
+                                                                                                                                                                                                                                                                      "end_location": {
+                                                                                                                                                                                                                                                                        "lat": {
+                                                                                                                                                                                                                                                                          "lng": [
+                                                                                                                                                                                                                                                                            [
+                                                                                                                                                                                                                                                                              "float}}\n                }\n              }",
+                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                "step_index": 2,
+                                                                                                                                                                                                                                                                                "instruction": "Merge onto {{word}} Expressway",
+                                                                                                                                                                                                                                                                                "distance": {
+                                                                                                                                                                                                                                                                                  "text": "68.9 km",
+                                                                                                                                                                                                                                                                                  "value": 68900
+                                                                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                                                                "duration": {
+                                                                                                                                                                                                                                                                                  "text": "48 mins",
+                                                                                                                                                                                                                                                                                  "value": 2880
+                                                                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                                                                                "maneuver": "merge",
+                                                                                                                                                                                                                                                                                "start_location": {
+                                                                                                                                                                                                                                                                                  "lat": {
+                                                                                                                                                                                                                                                                                    "lng": [
+                                                                                                                                                                                                                                                                                      [
+                                                                                                                                                                                                                                                                                        "float}}\n                }",
+                                                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                                                          "end_location": {
+                                                                                                                                                                                                                                                                                            "lat": {
+                                                                                                                                                                                                                                                                                              "lng": [
+                                                                                                                                                                                                                                                                                                [
+                                                                                                                                                                                                                                                                                                  "float}}\n                }\n              }"
+                                                                                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                                                                                              ]
+                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                          }
+                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                      ]
+                                                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                              }
+                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                          ]
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                      }
+                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                  ]
+                                                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                                                              }
+                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                          }
+                                                                                                                                                                                                                                                        ]
+                                                                                                                                                                                                                                                      ]
+                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                              ]
+                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                          }
+                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                      }
+                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                              ]
+                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                          }
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                      ]
+                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                              }
+                                                                                                                                                                                                            ]
+                                                                                                                                                                                                          }
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                      }
+                                                                                                                                                                                                    }
+                                                                                                                                                                                                  }
+                                                                                                                                                                                                }
+                                                                                                                                                                                              ]
+                                                                                                                                                                                            }
+                                                                                                                                                                                          }
+                                                                                                                                                                                        }
+                                                                                                                                                                                      }
+                                                                                                                                                                                    }
+                                                                                                                                                                                  }
+                                                                                                                                                                                }
+                                                                                                                                                                              }
+                                                                                                                                                                            }
+                                                                                                                                                                          }
+                                                                                                                                                                        }
+                                                                                                                                                                      }
+                                                                                                                                                                    }
+                                                                                                                                                                  }
+                                                                                                                                                                }
+                                                                                                                                                              ]
+                                                                                                                                                            ]
+                                                                                                                                                          }
+                                                                                                                                                        }
+                                                                                                                                                      }
+                                                                                                                                                    }
+                                                                                                                                                  }
+                                                                                                                                                }
+                                                                                                                                              }
+                                                                                                                                            }
+                                                                                                                                          }
+                                                                                                                                        }
+                                                                                                                                      ]
+                                                                                                                                    ]
+                                                                                                                                  }
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            }
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                      }
+                                                                                                                    }
+                                                                                                                  }
+                                                                                                                }
+                                                                                                              ]
+                                                                                                            ]
+                                                                                                          }
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                ]
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                ]
+                                                              ]
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

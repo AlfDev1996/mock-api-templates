@@ -36,7 +36,8 @@
     "category": "location",
     "name": "Geolocation & Maps API",
     "description": "Geocoding, reverse geocoding, distance matrix, points of interest, routing",
-    "published": false
+    "published": true,
+    "published_at": "2026-04-04"
   },
   {
     "slug": "file-upload-api",
