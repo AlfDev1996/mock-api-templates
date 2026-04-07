@@ -1,0 +1,630 @@
+{
+  "name": "File Upload & Storage API",
+  "description": "Upload files, get presigned URLs, list files, delete, generate thumbnails. A complete mock API for cloud file storage operations including metadata management, access control, and image processing.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Upload File",
+      "method": "POST",
+      "path": "/api/v1/files/upload",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 320,
+      "response": {
+        "success": true,
+        "data": {
+          "file_id": "{{uuid}}",
+          "filename": "{{word}}_{{integer}}.png",
+          "original_name": "{{word}}.png",
+          "mime_type": "image/png",
+          "size_bytes": "{{integer}}",
+          "checksum_sha256": "{{uuid}}{{uuid}}",
+          "storage_bucket": "uploads-production",
+          "storage_key": "files/{{uuid}}/{{word}}.png",
+          "status": "uploaded",
+          "visibility": "private",
+          "uploaded_by": {
+            "user_id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          },
+          "metadata": {
+            "width": 1920,
+            "height": 1080,
+            "color_space": "sRGB",
+            "has_alpha": "{{boolean}}",
+            "dominant_color": "{{color}}"
+          },
+          "versions": [
+            {
+              "version_id": "{{uuid}}",
+              "version_number": 1,
+              "created_at": "{{isodate}}"
+            }
+          ],
+          "tags": [],
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}",
+          "expires_at": null
+        },
+        "message": "File uploaded successfully"
+      }
+    },
+    {
+      "name": "Upload File - Size Limit Exceeded",
+      "method": "POST",
+      "path": "/api/v1/files/upload",
+      "status_code": 413,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 80,
+      "response": {
+        "success": false,
+        "error": {
+          "code": "FILE_TOO_LARGE",
+          "message": "The uploaded file exceeds the maximum allowed size of 100MB",
+          "details": {
+            "max_size_bytes": 104857600,
+            "received_size_bytes": 524288000,
+            "filename": "{{word}}_backup.zip"
+          },
+          "suggestion": "Compress the file or split it into smaller chunks using the multipart upload endpoint"
+        },
+        "request_id": "{{uuid}}",
+        "timestamp": "{{isodate}}"
+      }
+    },
+    {
+      "name": "List Files",
+      "method": "GET",
+      "path": "/api/v1/files",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}",
+        "X-RateLimit-Remaining": "147"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "files": [
+            {
+              "file_id": "{{uuid}}",
+              "filename": "{{word}}_report.pdf",
+              "original_name": "{{word}}_report_final.pdf",
+              "mime_type": "application/pdf",
+              "size_bytes": "{{integer}}",
+              "status": "available",
+              "visibility": "private",
+              "uploaded_by": {
+                "user_id": "{{uuid}}",
+                "name": "{{name}}",
+                "email": "{{email}}"
+              },
+              "thumbnail_url": "{{url}}",
+              "tags": [
+                "report",
+                "{{word}}"
+              ],
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            },
+            {
+              "file_id": "{{uuid}}",
+              "filename": "{{word}}_photo.jpg",
+              "original_name": "IMG_{{integer}}.jpg",
+              "mime_type": "image/jpeg",
+              "size_bytes": "{{integer}}",
+              "status": "available",
+              "visibility": "public",
+              "uploaded_by": {
+                "user_id": "{{uuid}}",
+                "name": "{{name}}",
+                "email": "{{email}}"
+              },
+              "thumbnail_url": "{{url}}",
+              "tags": [
+                "photo",
+                "{{word}}"
+              ],
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            },
+            {
+              "file_id": "{{uuid}}",
+              "filename": "{{word}}_data.csv",
+              "original_name": "{{word}}_export_{{integer}}.csv",
+              "mime_type": "text/csv",
+              "size_bytes": "{{integer}}",
+              "status": "available",
+              "visibility": "private",
+              "uploaded_by": {
+                "user_id": "{{uuid}}",
+                "name": "{{name}}",
+                "email": "{{email}}"
+              },
+              "thumbnail_url": null,
+              "tags": [
+                "data",
+                "export"
+              ],
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            },
+            {
+              "file_id": "{{uuid}}",
+              "filename": "{{word}}_design.psd",
+              "original_name": "{{word}}_v2_final.psd",
+              "mime_type": "image/vnd.adobe.photoshop",
+              "size_bytes": "{{integer}}",
+              "status": "processing",
+              "visibility": "team",
+              "uploaded_by": {
+                "user_id": "{{uuid}}",
+                "name": "{{name}}",
+                "email": "{{email}}"
+              },
+              "thumbnail_url": null,
+              "tags": [
+                "design",
+                "{{word}}"
+              ],
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            },
+            {
+              "file_id": "{{uuid}}",
+              "filename": "{{word}}_presentation.pptx",
+              "original_name": "Q4_{{word}}_deck.pptx",
+              "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+              "size_bytes": "{{integer}}",
+              "status": "available",
+              "visibility": "private",
+              "uploaded_by": {
+                "user_id": "{{uuid}}",
+                "name": "{{name}}",
+                "email": "{{email}}"
+              },
+              "thumbnail_url": "{{url}}",
+              "tags": [
+                "presentation",
+                "{{word}}"
+              ],
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            }
+          ],
+          "pagination": {
+            "page": 1,
+            "per_page": 25,
+            "total_items": 142,
+            "total_pages": 6,
+            "has_next": true,
+            "has_previous": false
+          },
+          "storage_summary": {
+            "total_files": 142,
+            "total_size_bytes": 5368709120,
+            "quota_bytes": 10737418240,
+            "usage_percentage": 50.0
+          }
+        }
+      }
+    },
+    {
+      "name": "Get File Details",
+      "method": "GET",
+      "path": "/api/v1/files/:file_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "file_id": "{{uuid}}",
+          "filename": "{{word}}_document.pdf",
+          "original_name": "{{word}}_contract_signed.pdf",
+          "mime_type": "application/pdf",
+          "size_bytes": "{{integer}}",
+          "checksum_sha256": "{{uuid}}{{uuid}}",
+          "storage_bucket": "uploads-production",
+          "storage_key": "files/{{uuid}}/{{word}}_document.pdf",
+          "storage_class": "STANDARD",
+          "status": "available",
+          "visibility": "private",
+          "uploaded_by": {
+            "user_id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}",
+            "avatar_url": "{{url}}"
+          },
+          "metadata": {
+            "page_count": 12,
+            "author": "{{name}}",
+            "title": "{{sentence}}",
+            "created_with": "Adobe Acrobat Pro"
+          },
+          "versions": [
+            {
+              "version_id": "{{uuid}}",
+              "version_number": 3,
+              "size_bytes": "{{integer}}",
+              "checksum_sha256": "{{uuid}}",
+              "uploaded_by": "{{name}}",
+              "created_at": "{{isodate}}"
+            },
+            {
+              "version_id": "{{uuid}}",
+              "version_number": 2,
+              "size_bytes": "{{integer}}",
+              "checksum_sha256": "{{uuid}}",
+              "uploaded_by": "{{name}}",
+              "created_at": "{{isodate}}"
+            },
+            {
+              "version_id": "{{uuid}}",
+              "version_number": 1,
+              "size_bytes": "{{integer}}",
+              "checksum_sha256": "{{uuid}}",
+              "uploaded_by": "{{name}}",
+              "created_at": "{{isodate}}"
+            }
+          ],
+          "tags": [
+            "contract",
+            "{{word}}",
+            "signed"
+          ],
+          "permissions": {
+            "owner": "{{uuid}}",
+            "shared_with": [
+              {
+                "user_id": "{{uuid}}",
+                "email": "{{email}}",
+                "permission": "read",
+                "granted_at": "{{isodate}}"
+              },
+              {
+                "user_id": "{{uuid}}",
+                "email": "{{email}}",
+                "permission": "read_write",
+                "granted_at": "{{isodate}}"
+              }
+            ],
+            "public_link_enabled": false
+          },
+          "download_count": "{{integer}}",
+          "last_accessed_at": "{{isodate}}",
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}",
+          "expires_at": null
+        }
+      }
+    },
+    {
+      "name": "Get File Details - Not Found",
+      "method": "GET",
+      "path": "/api/v1/files/:file_id",
+      "status_code": 404,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": false,
+        "error": {
+          "code": "FILE_NOT_FOUND",
+          "message": "The requested file could not be found or has been permanently deleted",
+          "details": {
+            "file_id": "{{uuid}}",
+            "searched_buckets": [
+              "uploads-production",
+              "uploads-archive"
+            ]
+          },
+          "suggestion": "Verify the file ID is correct. Deleted files are retained for 30 days in the trash before permanent removal."
+        },
+        "request_id": "{{uuid}}",
+        "timestamp": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Generate Presigned Download URL",
+      "method": "POST",
+      "path": "/api/v1/files/:file_id/presigned-url",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 120,
+      "response": {
+        "success": true,
+        "data": {
+          "file_id": "{{uuid}}",
+          "filename": "{{word}}_archive.zip",
+          "presigned_url": "https://storage.mockhub-cdn.com/uploads-production/files/{{uuid}}/{{word}}_archive.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential={{uuid}}&X-Amz-Date={{timestamp}}&X-Amz-Expires=3600&X-Amz-Signature={{uuid}}",
+          "method": "GET",
+          "expires_in_seconds": 3600,
+          "expires_at": "{{isodate}}",
+          "content_type": "application/zip",
+          "content_length": "{{integer}}",
+          "headers_required": {
+            "Content-Type": "application/zip"
+          },
+          "ip_restriction": null,
+          "max_downloads": 5,
+          "generated_at": "{{isodate}}",
+          "generated_by": {
+            "user_id": "{{uuid}}",
+            "email": "{{email}}"
+          }
+        }
+      }
+    },
+    {
+      "name": "Generate Presigned Upload URL",
+      "method": "POST",
+      "path": "/api/v1/files/presigned-upload",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 150,
+      "response": {
+        "success": true,
+        "data": {
+          "upload_id": "{{uuid}}",
+          "presigned_url": "https://storage.mockhub-cdn.com/uploads-production/pending/{{uuid}}/{{word}}.dat?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential={{uuid}}&X-Amz-Date={{timestamp}}&X-Amz-Expires=900&X-Amz-Signature={{uuid}}",
+          "method": "PUT",
+          "storage_key": "pending/{{uuid}}/{{word}}.dat",
+          "bucket": "uploads-production",
+          "expires_in_seconds": 900,
+          "expires_at": "{{isodate}}",
+          "max_file_size_bytes": 104857600,
+          "allowed_content_types": [
+            "image/jpeg",
+            "image/png",
+            "image/gif",
+            "image/webp",
+            "application/pdf",
+            "text/csv",
+            "application/zip"
+          ],
+          "required_headers": {
+            "Content-Type": "application/octet-stream",
+            "x-amz-meta-upload-id": "{{uuid}}"
+          },
+          "callback_url": "https://api.mockhub-storage.com/api/v1/files/upload-complete/{{uuid}}",
+          "generated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Update File Metadata",
+      "method": "PATCH",
+      "path": "/api/v1/files/:file_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 180,
+      "response": {
+        "success": true,
+        "data": {
+          "file_id": "{{uuid}}",
+          "filename": "{{word}}_updated.pdf",
+          "visibility": "team",
+          "tags": [
+            "{{word}}",
+            "{{word}}",
+            "updated"
+          ],
+          "metadata": {
+            "description": "{{sentence}}",
+            "category": "{{word}}",
+            "department": "{{company}}",
+            "custom_fields": {
+              "project_id": "{{uuid}}",
+              "priority": "high"
+            }
+          },
+          "permissions": {
+            "owner": "{{uuid}}",
+            "shared_with": [
+              {
+                "user_id": "{{uuid}}",
+                "email": "{{email}}",
+                "permission": "read_write",
+                "granted_at": "{{isodate}}"
+              }
+            ]
+          },
+          "updated_at": "{{isodate}}",
+          "updated_by": {
+            "user_id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          }
+        },
+        "message": "File metadata updated successfully"
+      }
+    },
+    {
+      "name": "Generate Thumbnail",
+      "method": "POST",
+      "path": "/api/v1/files/:file_id/thumbnails",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 350,
+      "response": {
+        "success": true,
+        "data": {
+          "file_id": "{{uuid}}",
+          "original_filename": "{{word}}_photo.jpg",
+          "thumbnails": [
+            {
+              "thumbnail_id": "{{uuid}}",
+              "size": "small",
+              "width": 150,
+              "height": 150,
+              "format": "webp",
+              "quality": 80,
+              "size_bytes": "{{integer}}",
+              "url": "{{url}}",
+              "cdn_url": "https://cdn.mockhub-storage.com/thumbnails/{{uuid}}/small_150x150.webp",
+              "status": "ready",
+              "generated_at": "{{isodate}}"
+            },
+            {
+              "thumbnail_id": "{{uuid}}",
+              "size": "medium",
+              "width": 400,
+              "height": 400,
+              "format": "webp",
+              "quality": 85,
+              "size_bytes": "{{integer}}",
+              "url": "{{url}}",
+              "cdn_url": "https://cdn.mockhub-storage.com/thumbnails/{{uuid}}/medium_400x400.webp",
+              "status": "ready",
+              "generated_at": "{{isodate}}"
+            },
+            {
+              "thumbnail_id": "{{uuid}}",
+              "size": "large",
+              "width": 800,
+              "height": 800,
+              "format": "webp",
+              "quality": 90,
+              "size_bytes": "{{integer}}",
+              "url": "{{url}}",
+              "cdn_url": "https://cdn.mockhub-storage.com/thumbnails/{{uuid}}/large_800x800.webp",
+              "status": "ready",
+              "generated_at": "{{isodate}}"
+            }
+          ],
+          "processing_time_ms": 847,
+          "original_dimensions": {
+            "width": 4032,
+            "height": 3024
+          },
+          "dominant_color": "{{color}}",
+          "generated_by": "image-processor-v3.2"
+        },
+        "message": "Thumbnails generated successfully"
+      }
+    },
+    {
+      "name": "Generate Thumbnail - Unsupported Format",
+      "method": "POST",
+      "path": "/api/v1/files/:file_id/thumbnails",
+      "status_code": 422,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 100,
+      "response": {
+        "success": false,
+        "error": {
+          "code": "UNSUPPORTED_FILE_FORMAT",
+          "message": "Thumbnail generation is not supported for this file type",
+          "details": {
+            "file_id": "{{uuid}}",
+            "filename": "{{word}}_data.csv",
+            "mime_type": "text/csv",
+            "supported_formats": [
+              "image/jpeg",
+              "image/png",
+              "image/gif",
+              "image/webp",
+              "image/tiff",
+              "image/bmp",
+              "application/pdf",
+              "video/mp4"
+            ]
+          },
+          "suggestion": "Thumbnail generation is only available for image, PDF, and video files. Consider using a file preview endpoint instead."
+        },
+        "request_id": "{{uuid}}",
+        "timestamp": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Delete File",
+      "method": "DELETE",
+      "path": "/api/v1/files/:file_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "file_id": "{{uuid}}",
+          "filename": "{{word}}_old_backup.tar.gz",
+          "status": "deleted",
+          "deleted_at": "{{isodate}}",
+          "deleted_by": {
+            "user_id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          },
+          "permanent_deletion_at": "{{isodate}}",
+          "recoverable": true,
+          "recovery_window_days": 30,
+          "freed_bytes": "{{integer}}",
+          "thumbnails_deleted": 3,
+          "versions_deleted": 2,
+          "shared_links_revoked": 1
+        },
+        "message": "File moved to trash. It will be permanently deleted after 30 days."
+      }
+    },
+    {
+      "name": "Delete File - Forbidden",
+      "method": "DELETE",
+      "path": "/api/v1/files/:file_id",
+      "status_code": 403,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 80,
+      "response": {
+        "success": false,
+        "error": {
+          "code": "INSUFFICIENT_PERMISSIONS",
+          "message": "You do not have permission to delete this file",
+          "details": {
+            "file_id": "{{uuid}}",
+            "file_owner": "{{email}}",
+            "your_permission": "read",
+            "required_permission": "owner",
+            "your_user_id": "{{uuid}}"
+          },
+          "suggestion": "Only the file owner or an administrator can delete files. Contact the file owner or request elevated permissions."
+        },
+        "request_id": "{{uuid}}",
+        "timestamp": "{{isodate}}"
+      }
+    }
+  ]
+}

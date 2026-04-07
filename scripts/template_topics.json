@@ -44,7 +44,8 @@
     "category": "storage",
     "name": "File Upload & Storage API",
     "description": "Upload files, get presigned URLs, list files, delete, generate thumbnails",
-    "published": false
+    "published": true,
+    "published_at": "2026-04-07"
   },
   {
     "slug": "task-management-api",
