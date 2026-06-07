@@ -52,7 +52,8 @@
     "category": "productivity",
     "name": "Task Management API",
     "description": "Projects, tasks, subtasks, assignees, due dates, labels, Kanban status",
-    "published": false
+    "published": true,
+    "published_at": "2026-06-07"
   },
   {
     "slug": "email-api",

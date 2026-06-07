@@ -1,0 +1,734 @@
+{
+  "name": "Task Management API",
+  "description": "Projects, tasks, subtasks, assignees, due dates, labels, Kanban status. Full CRUD with nested resources for productivity workflows.",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "List All Projects",
+      "method": "GET",
+      "path": "/api/v1/projects",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "meta": {
+          "total": 3,
+          "page": 1,
+          "per_page": 25
+        },
+        "data": [
+          {
+            "id": "{{uuid}}",
+            "name": "{{company}} Platform Redesign",
+            "description": "{{sentence}}",
+            "status": "active",
+            "owner": {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "avatar_url": "{{url}}"
+            },
+            "task_count": "{{integer}}",
+            "completed_task_count": "{{integer}}",
+            "labels": [
+              "frontend",
+              "priority-high",
+              "{{word}}"
+            ],
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{company}} Mobile App",
+            "description": "{{sentence}}",
+            "status": "active",
+            "owner": {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "avatar_url": "{{url}}"
+            },
+            "task_count": "{{integer}}",
+            "completed_task_count": "{{integer}}",
+            "labels": [
+              "mobile",
+              "{{word}}"
+            ],
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "name": "{{company}} API Integration",
+            "description": "{{sentence}}",
+            "status": "archived",
+            "owner": {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "avatar_url": "{{url}}"
+            },
+            "task_count": "{{integer}}",
+            "completed_task_count": "{{integer}}",
+            "labels": [
+              "backend",
+              "{{word}}"
+            ],
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Get Project Details",
+      "method": "GET",
+      "path": "/api/v1/projects/:project_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "id": "{{uuid}}",
+          "name": "{{company}} Platform Redesign",
+          "description": "{{sentence}}",
+          "status": "active",
+          "visibility": "team",
+          "owner": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}",
+            "job_title": "{{jobtitle}}",
+            "avatar_url": "{{url}}"
+          },
+          "members": [
+            {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "role": "admin",
+              "joined_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "role": "member",
+              "joined_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "role": "viewer",
+              "joined_at": "{{isodate}}"
+            }
+          ],
+          "kanban_columns": [
+            {
+              "id": "col-1",
+              "name": "Backlog",
+              "position": 0,
+              "task_count": "{{integer}}",
+              "color": "{{color}}"
+            },
+            {
+              "id": "col-2",
+              "name": "To Do",
+              "position": 1,
+              "task_count": "{{integer}}",
+              "color": "{{color}}"
+            },
+            {
+              "id": "col-3",
+              "name": "In Progress",
+              "position": 2,
+              "task_count": "{{integer}}",
+              "color": "{{color}}"
+            },
+            {
+              "id": "col-4",
+              "name": "In Review",
+              "position": 3,
+              "task_count": "{{integer}}",
+              "color": "{{color}}"
+            },
+            {
+              "id": "col-5",
+              "name": "Done",
+              "position": 4,
+              "task_count": "{{integer}}",
+              "color": "{{color}}"
+            }
+          ],
+          "labels": [
+            {
+              "name": "bug",
+              "color": "#e74c3c"
+            },
+            {
+              "name": "feature",
+              "color": "#2ecc71"
+            },
+            {
+              "name": "enhancement",
+              "color": "#3498db"
+            },
+            {
+              "name": "{{word}}",
+              "color": "{{color}}"
+            }
+          ],
+          "task_count": "{{integer}}",
+          "completed_task_count": "{{integer}}",
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Create New Project",
+      "method": "POST",
+      "path": "/api/v1/projects",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "Location": "/api/v1/projects/{{uuid}}",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 200,
+      "response": {
+        "success": true,
+        "message": "Project created successfully",
+        "data": {
+          "id": "{{uuid}}",
+          "name": "{{company}} New Initiative",
+          "description": "{{sentence}}",
+          "status": "active",
+          "visibility": "team",
+          "owner": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          },
+          "members": [],
+          "kanban_columns": [
+            {
+              "id": "col-1",
+              "name": "Backlog",
+              "position": 0,
+              "task_count": 0,
+              "color": "#95a5a6"
+            },
+            {
+              "id": "col-2",
+              "name": "To Do",
+              "position": 1,
+              "task_count": 0,
+              "color": "#3498db"
+            },
+            {
+              "id": "col-3",
+              "name": "In Progress",
+              "position": 2,
+              "task_count": 0,
+              "color": "#f39c12"
+            },
+            {
+              "id": "col-4",
+              "name": "Done",
+              "position": 3,
+              "task_count": 0,
+              "color": "#2ecc71"
+            }
+          ],
+          "labels": [],
+          "task_count": 0,
+          "completed_task_count": 0,
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "List Tasks in Project",
+      "method": "GET",
+      "path": "/api/v1/projects/:project_id/tasks",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "meta": {
+          "total": 4,
+          "page": 1,
+          "per_page": 50,
+          "filters": {
+            "status": "all",
+            "assignee": null,
+            "label": null
+          }
+        },
+        "data": [
+          {
+            "id": "{{uuid}}",
+            "project_id": "{{uuid}}",
+            "title": "Implement user authentication flow",
+            "description": "{{sentence}}",
+            "kanban_status": "in_progress",
+            "priority": "high",
+            "assignees": [
+              {
+                "id": "{{uuid}}",
+                "name": "{{name}}",
+                "email": "{{email}}",
+                "avatar_url": "{{url}}"
+              }
+            ],
+            "labels": [
+              "feature",
+              "backend"
+            ],
+            "due_date": "{{isodate}}",
+            "estimated_hours": "{{float}}",
+            "subtask_count": 3,
+            "completed_subtask_count": 1,
+            "comments_count": "{{integer}}",
+            "attachments_count": "{{integer}}",
+            "created_by": {
+              "id": "{{uuid}}",
+              "name": "{{name}}"
+            },
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "project_id": "{{uuid}}",
+            "title": "Design landing page mockups",
+            "description": "{{sentence}}",
+            "kanban_status": "todo",
+            "priority": "medium",
+            "assignees": [
+              {
+                "id": "{{uuid}}",
+                "name": "{{name}}",
+                "email": "{{email}}",
+                "avatar_url": "{{url}}"
+              },
+              {
+                "id": "{{uuid}}",
+                "name": "{{name}}",
+                "email": "{{email}}",
+                "avatar_url": "{{url}}"
+              }
+            ],
+            "labels": [
+              "design",
+              "frontend"
+            ],
+            "due_date": "{{isodate}}",
+            "estimated_hours": "{{float}}",
+            "subtask_count": 5,
+            "completed_subtask_count": 0,
+            "comments_count": "{{integer}}",
+            "attachments_count": "{{integer}}",
+            "created_by": {
+              "id": "{{uuid}}",
+              "name": "{{name}}"
+            },
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "project_id": "{{uuid}}",
+            "title": "Fix pagination bug on dashboard",
+            "description": "{{sentence}}",
+            "kanban_status": "in_review",
+            "priority": "critical",
+            "assignees": [
+              {
+                "id": "{{uuid}}",
+                "name": "{{name}}",
+                "email": "{{email}}",
+                "avatar_url": "{{url}}"
+              }
+            ],
+            "labels": [
+              "bug",
+              "{{word}}"
+            ],
+            "due_date": "{{isodate}}",
+            "estimated_hours": "{{float}}",
+            "subtask_count": 2,
+            "completed_subtask_count": 2,
+            "comments_count": "{{integer}}",
+            "attachments_count": 0,
+            "created_by": {
+              "id": "{{uuid}}",
+              "name": "{{name}}"
+            },
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          },
+          {
+            "id": "{{uuid}}",
+            "project_id": "{{uuid}}",
+            "title": "Write API documentation",
+            "description": "{{sentence}}",
+            "kanban_status": "backlog",
+            "priority": "low",
+            "assignees": [],
+            "labels": [
+              "documentation"
+            ],
+            "due_date": null,
+            "estimated_hours": null,
+            "subtask_count": 0,
+            "completed_subtask_count": 0,
+            "comments_count": 0,
+            "attachments_count": 0,
+            "created_by": {
+              "id": "{{uuid}}",
+              "name": "{{name}}"
+            },
+            "created_at": "{{isodate}}",
+            "updated_at": "{{isodate}}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Get Task Details with Subtasks",
+      "method": "GET",
+      "path": "/api/v1/tasks/:task_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "success": true,
+        "data": {
+          "id": "{{uuid}}",
+          "project_id": "{{uuid}}",
+          "title": "Implement user authentication flow",
+          "description": "{{sentence}}",
+          "kanban_status": "in_progress",
+          "kanban_column_id": "col-3",
+          "priority": "high",
+          "position": "{{integer}}",
+          "assignees": [
+            {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}",
+              "job_title": "{{jobtitle}}",
+              "avatar_url": "{{url}}"
+            }
+          ],
+          "labels": [
+            {
+              "name": "feature",
+              "color": "#2ecc71"
+            },
+            {
+              "name": "backend",
+              "color": "#9b59b6"
+            }
+          ],
+          "due_date": "{{isodate}}",
+          "start_date": "{{isodate}}",
+          "estimated_hours": "{{float}}",
+          "logged_hours": "{{float}}",
+          "subtasks": [
+            {
+              "id": "{{uuid}}",
+              "title": "Set up OAuth2 provider configuration",
+              "completed": true,
+              "assignee": {
+                "id": "{{uuid}}",
+                "name": "{{name}}"
+              },
+              "due_date": "{{isodate}}",
+              "completed_at": "{{isodate}}",
+              "created_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "title": "Implement JWT token generation and validation",
+              "completed": false,
+              "assignee": {
+                "id": "{{uuid}}",
+                "name": "{{name}}"
+              },
+              "due_date": "{{isodate}}",
+              "completed_at": null,
+              "created_at": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "title": "Add refresh token rotation logic",
+              "completed": false,
+              "assignee": null,
+              "due_date": null,
+              "completed_at": null,
+              "created_at": "{{isodate}}"
+            }
+          ],
+          "comments": [
+            {
+              "id": "{{uuid}}",
+              "author": {
+                "id": "{{uuid}}",
+                "name": "{{name}}",
+                "avatar_url": "{{url}}"
+              },
+              "body": "{{sentence}}",
+              "created_at": "{{isodate}}",
+              "edited": false
+            },
+            {
+              "id": "{{uuid}}",
+              "author": {
+                "id": "{{uuid}}",
+                "name": "{{name}}",
+                "avatar_url": "{{url}}"
+              },
+              "body": "{{sentence}}",
+              "created_at": "{{isodate}}",
+              "edited": true
+            }
+          ],
+          "attachments": [
+            {
+              "id": "{{uuid}}",
+              "filename": "auth-flow-diagram.png",
+              "url": "{{url}}",
+              "size_bytes": "{{integer}}",
+              "uploaded_by": "{{name}}",
+              "uploaded_at": "{{isodate}}"
+            }
+          ],
+          "activity_log": [
+            {
+              "id": "{{uuid}}",
+              "action": "status_changed",
+              "from": "todo",
+              "to": "in_progress",
+              "actor": "{{name}}",
+              "timestamp": "{{isodate}}"
+            },
+            {
+              "id": "{{uuid}}",
+              "action": "assignee_added",
+              "detail": "{{name}} was assigned",
+              "actor": "{{name}}",
+              "timestamp": "{{isodate}}"
+            }
+          ],
+          "created_by": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          },
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Create New Task",
+      "method": "POST",
+      "path": "/api/v1/projects/:project_id/tasks",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "Location": "/api/v1/tasks/{{uuid}}",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 180,
+      "response": {
+        "success": true,
+        "message": "Task created successfully",
+        "data": {
+          "id": "{{uuid}}",
+          "project_id": "{{uuid}}",
+          "title": "{{sentence}}",
+          "description": "{{sentence}}",
+          "kanban_status": "backlog",
+          "kanban_column_id": "col-1",
+          "priority": "medium",
+          "position": "{{integer}}",
+          "assignees": [
+            {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}"
+            }
+          ],
+          "labels": [
+            "{{word}}"
+          ],
+          "due_date": "{{isodate}}",
+          "start_date": null,
+          "estimated_hours": "{{float}}",
+          "logged_hours": 0,
+          "subtasks": [],
+          "comments": [],
+          "attachments": [],
+          "created_by": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          },
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Update Task (Partial)",
+      "method": "PATCH",
+      "path": "/api/v1/tasks/:task_id",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 150,
+      "response": {
+        "success": true,
+        "message": "Task updated successfully",
+        "data": {
+          "id": "{{uuid}}",
+          "project_id": "{{uuid}}",
+          "title": "{{sentence}}",
+          "description": "{{sentence}}",
+          "kanban_status": "in_progress",
+          "kanban_column_id": "col-3",
+          "priority": "high",
+          "assignees": [
+            {
+              "id": "{{uuid}}",
+              "name": "{{name}}",
+              "email": "{{email}}"
+            }
+          ],
+          "labels": [
+            "feature",
+            "{{word}}"
+          ],
+          "due_date": "{{isodate}}",
+          "estimated_hours": "{{float}}",
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Move Task on Kanban Board",
+      "method": "PATCH",
+      "path": "/api/v1/tasks/:task_id/move",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 100,
+      "response": {
+        "success": true,
+        "message": "Task moved successfully",
+        "data": {
+          "id": "{{uuid}}",
+          "title": "{{sentence}}",
+          "previous_status": "in_progress",
+          "new_status": "in_review",
+          "previous_column_id": "col-3",
+          "new_column_id": "col-4",
+          "position": "{{integer}}",
+          "moved_by": {
+            "id": "{{uuid}}",
+            "name": "{{name}}"
+          },
+          "moved_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Add Subtask to Task",
+      "method": "POST",
+      "path": "/api/v1/tasks/:task_id/subtasks",
+      "status_code": 201,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 120,
+      "response": {
+        "success": true,
+        "message": "Subtask added successfully",
+        "data": {
+          "id": "{{uuid}}",
+          "parent_task_id": "{{uuid}}",
+          "title": "{{sentence}}",
+          "completed": false,
+          "assignee": {
+            "id": "{{uuid}}",
+            "name": "{{name}}",
+            "email": "{{email}}"
+          },
+          "due_date": "{{isodate}}",
+          "position": "{{integer}}",
+          "completed_at": null,
+          "created_by": {
+            "id": "{{uuid}}",
+            "name": "{{name}}"
+          },
+          "created_at": "{{isodate}}",
+          "updated_at": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Toggle Subtask Completion",
+      "method": "PATCH",
+      "path": "/api/v1/subtasks/:subtask_id/toggle",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 80,
+      "response": {
+        "success": true,
+        "data": {
+          "id": "{{uuid}}",
+          "parent_task_id": "{{uuid}}",
+          "title": "{{sentence}}",
+          "completed": true,
+          "completed_at": "{{isodate}}",
+          "toggled_by": {
+            "id": "{{uuid}}",
+            "name": "{{name}}"
+          },
+          "updated_at": "{{isodate}}"
+        }
+      }
+    }
+  ]
+}
