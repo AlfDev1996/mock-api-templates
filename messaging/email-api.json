@@ -1,0 +1,682 @@
+{
+  "name": "Email Service API",
+  "description": "Send email, templates, delivery status, bounces, unsubscribes, webhooks",
+  "import_to_mockhub": "https://mockhub.ovh/api-generator/generate_api.html",
+  "endpoints": [
+    {
+      "name": "Send Email",
+      "method": "POST",
+      "path": "/emails/send",
+      "status_code": 202,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 250,
+      "response": {
+        "message_id": "{{uuid}}",
+        "status": "queued",
+        "from": "noreply@{{company}}.com",
+        "to": [
+          "{{email}}"
+        ],
+        "cc": [],
+        "bcc": [],
+        "subject": "{{sentence}}",
+        "content_type": "text/html",
+        "priority": "normal",
+        "tags": [
+          "{{word}}",
+          "{{word}}"
+        ],
+        "metadata": {
+          "campaign_id": "{{uuid}}",
+          "source": "{{word}}"
+        },
+        "queued_at": "{{isodate}}",
+        "estimated_delivery": "{{isodate}}"
+      }
+    },
+    {
+      "name": "Send Email - Invalid Recipient",
+      "method": "POST",
+      "path": "/emails/send",
+      "status_code": 422,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-Request-Id": "{{uuid}}"
+      },
+      "delay_ms": 100,
+      "response": {
+        "error": {
+          "code": "INVALID_RECIPIENT",
+          "message": "One or more recipient email addresses are invalid or malformed.",
+          "details": [
+            {
+              "field": "to[0]",
+              "value": "not-an-email",
+              "reason": "Invalid email format. Expected format: user@domain.tld"
+            }
+          ],
+          "request_id": "{{uuid}}",
+          "timestamp": "{{isodate}}"
+        }
+      }
+    },
+    {
+      "name": "Get Email Delivery Status",
+      "method": "GET",
+      "path": "/emails/:message_id/status",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json",
+        "X-RateLimit-Remaining": "{{integer}}"
+      },
+      "delay_ms": 0,
+      "response": {
+        "message_id": "{{uuid}}",
+        "status": "delivered",
+        "from": "noreply@{{company}}.com",
+        "to": "{{email}}",
+        "subject": "{{sentence}}",
+        "events": [
+          {
+            "event": "queued",
+            "timestamp": "{{isodate}}",
+            "details": null
+          },
+          {
+            "event": "sent",
+            "timestamp": "{{isodate}}",
+            "details": {
+              "smtp_response": "250 OK",
+              "server": "{{ipv4}}"
+            }
+          },
+          {
+            "event": "delivered",
+            "timestamp": "{{isodate}}",
+            "details": {
+              "mx_host": "mx1.{{word}}.com",
+              "delivery_time_ms": [
+                [
+                  "integer}}\n            }\n          }",
+                  {
+                    "event": "opened",
+                    "timestamp": "{{isodate}}",
+                    "details": {
+                      "user_agent": "Mozilla/5.0",
+                      "ip_address": "{{ipv4}}",
+                      "city": "{{city}}",
+                      "country": "{{country}}"
+                    }
+                  }
+                ],
+                {
+                  "open_count": 3,
+                  "click_count": 1,
+                  "created_at": "{{isodate}}",
+                  "updated_at": "{{isodate}}"
+                }
+              ],
+              "name": "Get Email Delivery Status - Not Found",
+              "method": "GET",
+              "path": "/emails/:message_id/status",
+              "status_code": 404,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "delay_ms": 0,
+              "response": {
+                "error": {
+                  "code": "MESSAGE_NOT_FOUND",
+                  "message": "No email message found with the provided message_id.",
+                  "request_id": "{{uuid}}",
+                  "timestamp": "{{isodate}}"
+                }
+              }
+            },
+            "name": "List Email Templates",
+            "method": "GET",
+            "path": "/templates",
+            "status_code": 200,
+            "headers": {
+              "Content-Type": "application/json",
+              "X-RateLimit-Remaining": "{{integer}}"
+            },
+            "delay_ms": 0,
+            "response": {
+              "data": [
+                {
+                  "template_id": "{{uuid}}",
+                  "name": "Welcome Email",
+                  "slug": "welcome-email",
+                  "subject": "Welcome to {{company}}!",
+                  "content_type": "text/html",
+                  "version": 3,
+                  "active": true,
+                  "tags": [
+                    "onboarding",
+                    "welcome"
+                  ],
+                  "created_by": "{{email}}",
+                  "created_at": "{{isodate}}",
+                  "updated_at": "{{isodate}}"
+                },
+                {
+                  "template_id": "{{uuid}}",
+                  "name": "Password Reset",
+                  "slug": "password-reset",
+                  "subject": "Reset your password",
+                  "content_type": "text/html",
+                  "version": 1,
+                  "active": true,
+                  "tags": [
+                    "security",
+                    "transactional"
+                  ],
+                  "created_by": "{{email}}",
+                  "created_at": "{{isodate}}",
+                  "updated_at": "{{isodate}}"
+                },
+                {
+                  "template_id": "{{uuid}}",
+                  "name": "Monthly Newsletter",
+                  "slug": "monthly-newsletter",
+                  "subject": "{{company}} Monthly Update - {{word}}",
+                  "content_type": "text/html",
+                  "version": 12,
+                  "active": true,
+                  "tags": [
+                    "marketing",
+                    "newsletter"
+                  ],
+                  "created_by": "{{email}}",
+                  "created_at": "{{isodate}}",
+                  "updated_at": "{{isodate}}"
+                }
+              ],
+              "pagination": {
+                "page": 1,
+                "per_page": 25,
+                "total_items": 3,
+                "total_pages": 1
+              }
+            }
+          },
+          {
+            "name": "Create Email Template",
+            "method": "POST",
+            "path": "/templates",
+            "status_code": 201,
+            "headers": {
+              "Content-Type": "application/json",
+              "Location": "/templates/{{uuid}}"
+            },
+            "delay_ms": 200,
+            "response": {
+              "template_id": "{{uuid}}",
+              "name": "{{word}} Notification",
+              "slug": "{{word}}-notification",
+              "subject": "{{sentence}}",
+              "html_body": "<html><body><h1>Hello {{firstname}}</h1><p>{{sentence}}</p></body></html>",
+              "text_body": "Hello {{firstname}}, {{sentence}}",
+              "content_type": "text/html",
+              "variables": [
+                "first_name",
+                "action_url",
+                "company_name"
+              ],
+              "version": 1,
+              "active": true,
+              "created_by": "{{email}}",
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            }
+          },
+          {
+            "name": "Update Email Template",
+            "method": "PUT",
+            "path": "/templates/:template_id",
+            "status_code": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "delay_ms": 180,
+            "response": {
+              "template_id": "{{uuid}}",
+              "name": "Updated {{word}} Template",
+              "slug": "updated-{{word}}-template",
+              "subject": "{{sentence}}",
+              "html_body": "<html><body><h1>Updated Content</h1><p>{{sentence}}</p></body></html>",
+              "text_body": "Updated: {{sentence}}",
+              "content_type": "text/html",
+              "variables": [
+                "first_name",
+                "action_url",
+                "company_name",
+                "unsubscribe_url"
+              ],
+              "version": 4,
+              "active": true,
+              "created_by": "{{email}}",
+              "updated_by": "{{email}}",
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            }
+          },
+          {
+            "name": "Delete Email Template",
+            "method": "DELETE",
+            "path": "/templates/:template_id",
+            "status_code": 204,
+            "headers": {
+              "Content-Type": "application/json",
+              "X-Request-Id": "{{uuid}}"
+            },
+            "delay_ms": 150,
+            "response": {}
+          },
+          {
+            "name": "List Bounces",
+            "method": "GET",
+            "path": "/bounces",
+            "status_code": 200,
+            "headers": {
+              "Content-Type": "application/json",
+              "X-RateLimit-Remaining": "{{integer}}"
+            },
+            "delay_ms": 0,
+            "response": {
+              "data": [
+                {
+                  "bounce_id": "{{uuid}}",
+                  "message_id": "{{uuid}}",
+                  "email": "{{email}}",
+                  "bounce_type": "hard",
+                  "bounce_code": "550",
+                  "diagnostic": "550 5.1.1 The email account that you tried to reach does not exist.",
+                  "mx_server": "{{ipv4}}",
+                  "occurred_at": "{{isodate}}"
+                },
+                {
+                  "bounce_id": "{{uuid}}",
+                  "message_id": "{{uuid}}",
+                  "email": "{{email}}",
+                  "bounce_type": "soft",
+                  "bounce_code": "452",
+                  "diagnostic": "452 4.2.2 Mailbox full. Try again later.",
+                  "mx_server": "{{ipv4}}",
+                  "occurred_at": "{{isodate}}"
+                },
+                {
+                  "bounce_id": "{{uuid}}",
+                  "message_id": "{{uuid}}",
+                  "email": "{{email}}",
+                  "bounce_type": "hard",
+                  "bounce_code": "550",
+                  "diagnostic": "550 5.1.2 Bad destination mailbox address.",
+                  "mx_server": "{{ipv4}}",
+                  "occurred_at": "{{isodate}}"
+                }
+              ],
+              "pagination": {
+                "page": 1,
+                "per_page": 50,
+                "total_items": 127,
+                "total_pages": 3
+              }
+            }
+          },
+          {
+            "name": "List Unsubscribes",
+            "method": "GET",
+            "path": "/unsubscribes",
+            "status_code": 200,
+            "headers": {
+              "Content-Type": "application/json",
+              "X-RateLimit-Remaining": "{{integer}}"
+            },
+            "delay_ms": 0,
+            "response": {
+              "data": [
+                {
+                  "unsubscribe_id": "{{uuid}}",
+                  "email": "{{email}}",
+                  "reason": "No longer interested",
+                  "source": "list-unsubscribe-header",
+                  "campaign_id": "{{uuid}}",
+                  "ip_address": "{{ipv4}}",
+                  "city": "{{city}}",
+                  "country": "{{country}}",
+                  "unsubscribed_at": "{{isodate}}"
+                },
+                {
+                  "unsubscribe_id": "{{uuid}}",
+                  "email": "{{email}}",
+                  "reason": "Too many emails",
+                  "source": "email-link",
+                  "campaign_id": "{{uuid}}",
+                  "ip_address": "{{ipv4}}",
+                  "city": "{{city}}",
+                  "country": "{{country}}",
+                  "unsubscribed_at": "{{isodate}}"
+                },
+                {
+                  "unsubscribe_id": "{{uuid}}",
+                  "email": "{{email}}",
+                  "reason": "Content not relevant",
+                  "source": "preference-center",
+                  "campaign_id": null,
+                  "ip_address": "{{ipv4}}",
+                  "city": "{{city}}",
+                  "country": "{{country}}",
+                  "unsubscribed_at": "{{isodate}}"
+                }
+              ],
+              "pagination": {
+                "page": 1,
+                "per_page": 50,
+                "total_items": 89,
+                "total_pages": 2
+              }
+            }
+          },
+          {
+            "name": "Add to Unsubscribe List",
+            "method": "POST",
+            "path": "/unsubscribes",
+            "status_code": 201,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "delay_ms": 120,
+            "response": {
+              "unsubscribe_id": "{{uuid}}",
+              "email": "{{email}}",
+              "reason": "Manual addition by administrator",
+              "source": "api",
+              "added_by": "{{email}}",
+              "created_at": "{{isodate}}"
+            }
+          },
+          {
+            "name": "Remove from Unsubscribe List",
+            "method": "DELETE",
+            "path": "/unsubscribes/:unsubscribe_id",
+            "status_code": 204,
+            "headers": {
+              "Content-Type": "application/json",
+              "X-Request-Id": "{{uuid}}"
+            },
+            "delay_ms": 100,
+            "response": {}
+          },
+          {
+            "name": "List Webhooks",
+            "method": "GET",
+            "path": "/webhooks",
+            "status_code": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "delay_ms": 0,
+            "response": {
+              "data": [
+                {
+                  "webhook_id": "{{uuid}}",
+                  "url": "{{url}}/webhooks/email-events",
+                  "events": [
+                    "delivered",
+                    "bounced",
+                    "opened",
+                    "clicked"
+                  ],
+                  "active": true,
+                  "secret": "whsec_{{uuid}}",
+                  "failure_count": 0,
+                  "last_triggered_at": "{{isodate}}",
+                  "created_at": "{{isodate}}",
+                  "updated_at": "{{isodate}}"
+                },
+                {
+                  "webhook_id": "{{uuid}}",
+                  "url": "{{url}}/hooks/unsubscribes",
+                  "events": [
+                    "unsubscribed",
+                    "complained"
+                  ],
+                  "active": true,
+                  "secret": "whsec_{{uuid}}",
+                  "failure_count": 2,
+                  "last_triggered_at": "{{isodate}}",
+                  "created_at": "{{isodate}}",
+                  "updated_at": "{{isodate}}"
+                }
+              ],
+              "pagination": {
+                "page": 1,
+                "per_page": 25,
+                "total_items": 2,
+                "total_pages": 1
+              }
+            }
+          },
+          {
+            "name": "Create Webhook",
+            "method": "POST",
+            "path": "/webhooks",
+            "status_code": 201,
+            "headers": {
+              "Content-Type": "application/json",
+              "Location": "/webhooks/{{uuid}}"
+            },
+            "delay_ms": 150,
+            "response": {
+              "webhook_id": "{{uuid}}",
+              "url": "{{url}}/webhooks/email-notifications",
+              "events": [
+                "delivered",
+                "bounced",
+                "opened",
+                "clicked",
+                "unsubscribed",
+                "complained"
+              ],
+              "active": true,
+              "secret": "whsec_{{uuid}}",
+              "failure_count": 0,
+              "last_triggered_at": null,
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            }
+          },
+          {
+            "name": "Update Webhook",
+            "method": "PATCH",
+            "path": "/webhooks/:webhook_id",
+            "status_code": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "delay_ms": 130,
+            "response": {
+              "webhook_id": "{{uuid}}",
+              "url": "{{url}}/webhooks/updated-endpoint",
+              "events": [
+                "delivered",
+                "bounced"
+              ],
+              "active": true,
+              "secret": "whsec_{{uuid}}",
+              "failure_count": 0,
+              "last_triggered_at": "{{isodate}}",
+              "created_at": "{{isodate}}",
+              "updated_at": "{{isodate}}"
+            }
+          },
+          {
+            "name": "Delete Webhook",
+            "method": "DELETE",
+            "path": "/webhooks/:webhook_id",
+            "status_code": 204,
+            "headers": {
+              "Content-Type": "application/json",
+              "X-Request-Id": "{{uuid}}"
+            },
+            "delay_ms": 100,
+            "response": {}
+          },
+          {
+            "name": "Test Webhook",
+            "method": "POST",
+            "path": "/webhooks/:webhook_id/test",
+            "status_code": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "delay_ms": 350,
+            "response": {
+              "webhook_id": "{{uuid}}",
+              "test_event": {
+                "event_type": "delivered",
+                "message_id": "{{uuid}}",
+                "email": "{{email}}",
+                "timestamp": "{{isodate}}"
+              },
+              "result": {
+                "success": true,
+                "http_status": 200,
+                "response_time_ms": 142,
+                "response_body": "{\"received\":true}"
+              },
+              "tested_at": "{{isodate}}"
+            }
+          },
+          {
+            "name": "Send Email - Rate Limit Exceeded",
+            "method": "POST",
+            "path": "/emails/send",
+            "status_code": 429,
+            "headers": {
+              "Content-Type": "application/json",
+              "Retry-After": "60",
+              "X-RateLimit-Limit": "1000",
+              "X-RateLimit-Remaining": "0",
+              "X-RateLimit-Reset": "{{timestamp}}"
+            },
+            "delay_ms": 80,
+            "response": {
+              "error": {
+                "code": "RATE_LIMIT_EXCEEDED",
+                "message": "You have exceeded the maximum number of email sends per minute. Please wait before retrying.",
+                "limit": 1000,
+                "remaining": 0,
+                "reset_at": "{{isodate}}",
+                "retry_after_seconds": 60,
+                "request_id": "{{uuid}}",
+                "timestamp": "{{isodate}}"
+              }
+            }
+          },
+          {
+            "name": "Unauthorized Access",
+            "method": "GET",
+            "path": "/emails/:message_id/status",
+            "status_code": 401,
+            "headers": {
+              "Content-Type": "application/json",
+              "WWW-Authenticate": "Bearer"
+            },
+            "delay_ms": 0,
+            "response": {
+              "error": {
+                "code": "UNAUTHORIZED",
+                "message": "Invalid or missing API key. Please include a valid API key in the Authorization header.",
+                "hint": "Use header: Authorization: Bearer your-api-key",
+                "docs_url": "https://docs.emailservice.com/authentication",
+                "request_id": "{{uuid}}",
+                "timestamp": "{{isodate}}"
+              }
+            }
+          },
+          {
+            "name": "Internal Server Error - Email Send Failure",
+            "method": "POST",
+            "path": "/emails/send",
+            "status_code": 500,
+            "headers": {
+              "Content-Type": "application/json",
+              "X-Request-Id": "{{uuid}}"
+            },
+            "delay_ms": 300,
+            "response": {
+              "error": {
+                "code": "INTERNAL_ERROR",
+                "message": "An unexpected error occurred while processing your email send request. Our team has been notified.",
+                "request_id": "{{uuid}}",
+                "support_url": "https://support.emailservice.com",
+                "timestamp": "{{isodate}}"
+              }
+            }
+          },
+          {
+            "name": "Get Email Analytics Summary",
+            "method": "GET",
+            "path": "/analytics/summary",
+            "status_code": 200,
+            "headers": {
+              "Content-Type": "application/json",
+              "X-RateLimit-Remaining": "{{integer}}"
+            },
+            "delay_ms": 0,
+            "response": {
+              "period": {
+                "start": "{{isodate}}",
+                "end": "{{isodate}}"
+              },
+              "totals": {
+                "sent": 15482,
+                "delivered": 15103,
+                "bounced": 379,
+                "opened": 8721,
+                "clicked": 3204,
+                "unsubscribed": 89,
+                "complained": 12
+              },
+              "rates": {
+                "delivery_rate": 97.55,
+                "open_rate": 57.74,
+                "click_rate": 21.21,
+                "bounce_rate": 2.45,
+                "unsubscribe_rate": 0.59,
+                "complaint_rate": 0.08
+              },
+              "top_domains": [
+                {
+                  "domain": "gmail.com",
+                  "sent": 6213,
+                  "delivered": 6198,
+                  "delivery_rate": 99.76
+                },
+                {
+                  "domain": "outlook.com",
+                  "sent": 3891,
+                  "delivered": 3802,
+                  "delivery_rate": 97.71
+                },
+                {
+                  "domain": "yahoo.com",
+                  "sent": 2104,
+                  "delivered": 2031,
+                  "delivery_rate": 96.53
+                }
+              ],
+              "generated_at": "{{isodate}}"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

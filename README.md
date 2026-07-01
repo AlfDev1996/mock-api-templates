@@ -6,7 +6,7 @@
 [![MockHub](https://img.shields.io/badge/Powered%20by-MockHub-0d6efd)](https://mockhub.ovh)
 [![Templates](https://img.shields.io/badge/Templates-11-brightgreen)](#-all-templates)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-**Last updated: 2026-06-07** · [![Last updated](https://img.shields.io/github/last-commit/AlfDev1996/mock-api-templates)](https://github.com/AlfDev1996/mock-api-templates/commits/main)
+**Last updated: 2026-07-01** · [![Last updated](https://img.shields.io/github/last-commit/AlfDev1996/mock-api-templates)](https://github.com/AlfDev1996/mock-api-templates/commits/main)
 
 ---
 
@@ -179,6 +179,7 @@ Each endpoint can have **multiple scenarios** (different status codes / response
 ## 🔄 More Templates
 
 <!-- AUTO-GENERATED TEMPLATES -->
+| [messaging/email-api.json](messaging/email-api.json) | 3 | Send email, templates, delivery status, bounces, unsubscribes, webhooks |
 | [productivity/task-management-api.json](productivity/task-management-api.json) | 10 | Projects, tasks, subtasks, assignees, due dates, labels, Kanban status. Full CRU |
 | [storage/file-upload-api.json](storage/file-upload-api.json) | 12 | Upload files, get presigned URLs, list files, delete, generate thumbnails. A com |
 | [location/geolocation-api.json](location/geolocation-api.json) | 1 | Full-featured geolocation API supporting geocoding, reverse geocoding, distance  |

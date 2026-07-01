@@ -60,7 +60,8 @@
     "category": "messaging",
     "name": "Email Service API",
     "description": "Send email, templates, delivery status, bounces, unsubscribes, webhooks",
-    "published": false
+    "published": true,
+    "published_at": "2026-07-01"
   },
   {
     "slug": "weather-api",
